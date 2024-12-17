@@ -19,8 +19,8 @@ const Doctors = () => {
     }
 
     useEffect(() => {
-
-    }, [])
+        applyFilter()
+    }, [doctors, speciality])
 
     return (
         <div>
