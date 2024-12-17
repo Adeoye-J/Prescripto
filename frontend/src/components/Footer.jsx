@@ -3,8 +3,8 @@ import { assets } from '../assets/assets'
 
 const Footer = () => {
     return (
-        <div>
-            <div className="">
+        <div className='md:mx-10'>
+            <div className="flex flex-col sm:grid grid-cols- gap-14">
                 <div className="">
                     <img src={assets.logo} alt="Logo" />
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque obcaecati ab autem in sint mollitia quae commodi aut explicabo dolor minima repudiandae molestias, alias facilis aspernatur molestiae. Fugiat, omnis doloribus.</p>
@@ -31,7 +31,7 @@ const Footer = () => {
 
             <div className="">
                 <hr />
-                <p>Copyright 2024@ Prescripto - All Right Reserved. here </p>
+                <p>Copyright 2024@ Prescripto - All Right Reserved.</p>
             </div>
         </div>
     )
