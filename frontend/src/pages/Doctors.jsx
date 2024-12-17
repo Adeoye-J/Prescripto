@@ -28,7 +28,7 @@ const Doctors = () => {
             <p className='text-gray-600'>Browse through the doctors specialist.</p>
             <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
                 <div className="flex flex-col gap-4 text-sm text-gray-600">
-                    <p onClick={() => speciality === "" ? navigate("/doctors") : navigate("/doctors/")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>General Physician</p>
+                    <p onClick={() => speciality === "General Physician" ? navigate("/doctors") : navigate("/doctors/General physician")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>General Physician</p>
                     <p onClick={() => speciality === "" ? navigate("/doctors") : navigate("/doctors/")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Gynecologist</p>
                     <p onClick={() => speciality === "" ? navigate("/doctors") : navigate("/doctors/")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Dermatologist</p>
                     <p onClick={() => speciality === "" ? navigate("/doctors") : navigate("/doctors/")} className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer`}>Pediatricians</p>
