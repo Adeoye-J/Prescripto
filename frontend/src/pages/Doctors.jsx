@@ -27,13 +27,13 @@ const Doctors = () => {
         <div>
             <p className='text-gray-600'>Browse through the doctors specialist.</p>
             <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
-                <div className="">
-                    <p>General Physician</p>
-                    <p>Gynecologist</p>
-                    <p>Dermatologist</p>
-                    <p>Pediatricians</p>
-                    <p>Neurologist</p>
-                    <p>Gastroenterologist</p>
+                <div className="flex flex-col gap-4 text-sm text-gray-600">
+                    <p className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-`}>General Physician</p>
+                    <p className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-`}>Gynecologist</p>
+                    <p className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-`}>Dermatologist</p>
+                    <p className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-`}>Pediatricians</p>
+                    <p className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-`}>Neurologist</p>
+                    <p className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-`}>Gastroenterologist</p>
                 </div>
                 <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
                     {
