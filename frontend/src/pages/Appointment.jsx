@@ -9,16 +9,17 @@ const Appointment = () => {
 
     const [docInfo, setDocInfo] = useState(null)
 
-    const fetchDocInfo = () => {
-        const docInfo = doctors.find((doc) => doc._id === docId)
+    const fetchDocInfo = async () => {
+        const docInfo = doctors.find(doc => doc._id === docId)
         setDocInfo(docInfo)
+        console.log(docInfo)
     }
 
     useEffect(() => {
         fetchDocInfo()
-    }, [doctors, docId])
+    }, [doctors,docId])
 
-    console.log(docInfo)
+    // console.log(docInfo)
     
     return (
         <div>
