@@ -47,7 +47,8 @@ const Appointment = () => {
             let timeSlots = []
 
             while (currentDate < endTime) {
-                let formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit"})
+                // let formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit"})
+                let formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit"})
 
                 // add slot to array
                 timeSlots.push({
@@ -121,7 +122,7 @@ const Appointment = () => {
                 
                 <div className="">
                     {
-                        docSlots.length && docSlots[slotIndex].map((item. index) => (
+                        docSlots.length && docSlots[slotIndex].map((item, index) => (
                             <p key={index}>
                                 {item.time.toLowerCase()}
                             </p>
