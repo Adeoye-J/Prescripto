@@ -9,8 +9,8 @@ const Appointment = () => {
 
     const [docInfo, setDocInfo] = useState(null)
 
-    const fetchDocInfo = async () => {
-        const docInfo = await doctors.find((doc) => doc._id === docId)
+    const fetchDocInfo = () => {
+        const docInfo = doctors.find((doc) => doc._id === docId)
         setDocInfo(docInfo)
     }
 
@@ -22,9 +22,11 @@ const Appointment = () => {
     
     return (
         <div>
-            <p>Test content</p>
-            <p>{docInfo?.name}</p>
-            <img src={docInfo?.image} alt="" />
+            <div className="">
+                <div className="">
+                    <img src={docInfo.image} alt="" />
+                </div>
+            </div>
         </div>
     )
 }
