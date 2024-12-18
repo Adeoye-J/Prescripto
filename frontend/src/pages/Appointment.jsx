@@ -30,7 +30,22 @@ const Appointment = () => {
             currentDate.setDate(today.getDate() + i)
 
             // setting end time of the date with index
-            let endT
+            let endTime = new Date()
+            endTime.setDate(today.getDate() + 1)
+            endTime.setHours(21, 0, 0, 0)
+
+            // setting hours
+            if (today.getDate() === currentDate.getDate()) {
+                currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10)
+                currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0)
+            } else {
+                currentDate.setHours(10)
+                currentDate.setMinutes(0)
+            }
+
+            while (currentDate < endTime) {
+                let formattedTime = currentDate.toLocaleTimeString([])
+            }
         }
     }
 
