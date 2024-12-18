@@ -43,9 +43,22 @@ const Appointment = () => {
                 currentDate.setMinutes(0)
             }
 
+            let timeSlots = []
+
             while (currentDate < endTime) {
-                let formattedTime = currentDate.toLocaleTimeString([])
+                let formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit"})
+
+                // add slot to array
+                timeSlots.push({
+                    datetime: new Date(currentDate),
+                    time: formattedTime
+                })
+
+                // Increment time by 30 minutes
+                currentDate.setMinutes(currentDate.getMinutes() + 30)
             }
+
+            setDocSlots(prev => ([...prev, timeSlots]))
         }
     }
 
@@ -56,6 +69,7 @@ const Appointment = () => {
     useEffect(() => {
         getAvailableSlots()
     }, [docInfo])
+    
     // console.log(docInfo)
     
     return docInfo && (
