@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+import { assets } from '../assets/assets'
 
 const Appointment = () => {
 
@@ -21,11 +22,22 @@ const Appointment = () => {
 
     // console.log(docInfo)
     
-    return (
+    return docInfo && (
         <div>
             <div className="">
                 <div className="">
                     <img src={docInfo.image} alt="" />
+                </div>
+
+                <div className="">
+                    <p>{docInfo.name} <img src={assets.verified_icon} alt="Verified Icon" /></p>
+                    <div className="">
+                        <p>{docInfo.degree} - {docInfo.speciality}</p>
+                        <button>{docInfo.experience}</button>
+                    </div>
+                    <div className="">
+                        <p>About <img src={assets.info_icon} alt="Info Io" /></p>
+                    </div>
                 </div>
             </div>
         </div>
