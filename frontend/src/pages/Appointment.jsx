@@ -72,9 +72,8 @@ const Appointment = () => {
 
     useEffect(() => {
         console.log(docSlots)
-    }, [])
+    }, [docSlots])
 
-    // console.log(docInfo)
     
     return docInfo && (
         <div>
