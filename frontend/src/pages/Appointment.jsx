@@ -11,7 +11,7 @@ const Appointment = () => {
 
     const [docInfo, setDocInfo] = useState(null)
     const [docSlots, setDocSlots] = useState([])
-    const [slotIndex, setSortIndex] = useState(0)
+    const [slotIndex, setSlotIndex] = useState(0)
     const [slotTime, setSlotTime] = useState("")
 
     const fetchDocInfo = async () => {
@@ -110,13 +110,16 @@ const Appointment = () => {
                 <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
                     {
                         docSlots.length && docSlots.map((item, index) => (
-                            <div key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${item.time === slotTime ? "bg-primary text-white" : "text-gray-400 border border-gray-300"}`}>
+                            <div onClick={() => setSlotIndex(index)} key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${slotIndex === index ? "bg-primary text-white" : "border border-gray-300"}`}>
+                            {/* <div key={index} className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${item.time === slotTime ? "bg-primary text-white" : "text-gray-400 border border-gray-300"}`}> */}
                                 <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                                 <p>{item[0] && item[0].datetime.getDate()}</p>
                             </div>
                         ))
                     }
                 </div>
+                
+                <div className=""></div>
             </div>
 
             
