@@ -6,9 +6,11 @@ import { assets } from '../assets/assets'
 const Appointment = () => {
 
     const {docId} = useParams()
-    const {doctors} = useContext(AppContext)
+    const {doctors, currencySymbol} = useContext(AppContext)
 
     const [docInfo, setDocInfo] = useState(null)
+    const [docSlots, setDocSlots] = useState([])
+    const [slotIndex, setSortIndex] = useState(0)
 
     const fetchDocInfo = async () => {
         const docInfo = doctors.find(doc => doc._id === docId)
@@ -45,7 +47,7 @@ const Appointment = () => {
                         </p>
                         <p className='text-sm text-gray-500 max-w-[700px] mt-1'>{docInfo.about}</p>
                     </div>
-                    <p>Appointment fee:</p>
+                    <p className='text-gray-500 font-medium mt-4'>Appointment fee: <span className='text-gray-600'>{currencySymbol}{docInfo.fees}</span></p>
                 </div>
             </div>
         </div>
