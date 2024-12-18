@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useAsyncError, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets'
 import RelatedDoctors from '../components/RelatedDoctors'
@@ -8,7 +8,7 @@ const Appointment = () => {
 
     const {docId} = useParams()
     const {doctors, currencySymbol} = useContext(AppContext)
-    const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+    const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT1"]
 
     const [docInfo, setDocInfo] = useState(null)
     const [docSlots, setDocSlots] = useState([])
@@ -23,7 +23,6 @@ const Appointment = () => {
 
     const getAvailableSlots = () => {
         setDocSlots([])
-
         // getting current date
         let today = new Date()
         for (let i = 0; i < 7; i++) {
