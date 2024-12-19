@@ -34,7 +34,42 @@ const MyProfile = () => {
             <hr />
 
             <div className="">
-                <p></p>
+                <p>CONTACT INFORMATION</p>
+                <div className="">
+                    <p>Email Id:</p>
+                    <p>{userData.email}</p>
+                    <p>Phone:</p>
+                    {
+                        isEdit
+                        ? <input type="text" value={userData.phone} onChange={() => setUserData(prev => ({...prev, phone:e.target.value}))}/>
+                        : <p>{userData.phone}</p>
+                    }
+                    <p>Address:</p>
+                    {
+                        isEdit
+                        ? <p>
+                            <input type="text" value={userData.address.line1} onChange={() => setUserData(prev => ({...prev, address: {...prev.address, line1: e.target.value}}))}/>
+                            <br />
+                            <input type="text" value={userData.address.line2} onChange={() => setUserData(prev => ({...prev, address: {...prev.address, line2: e.target.value}}))}/>
+                        </p>
+                        : <p>
+                            {userData.address.line1}
+                            <br />
+                            {userData.address.line2}
+                        </p>
+                    }
+                </div>
+            </div>
+            <div className="">
+                <p>Gender:</p>
+                {
+                    isEdit
+                    ? <select onChange={() => setUserData()}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    : <p>{userData.gender}</p>
+                }
             </div>
         </div>
     )
