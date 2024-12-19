@@ -27,7 +27,7 @@ const MyProfile = () => {
 
             {
                 isEdit
-                ? <input type="text" value={userData.name} onChange={() => setUserData(prev => ({...prev, name:e.target.value}))}/>
+                ? <input type="text" value={userData.name} onChange={(e) => setUserData(prev => ({...prev, name:e.target.value}))}/>
                 : <p>{userData.name}</p>
             }
 
@@ -41,16 +41,16 @@ const MyProfile = () => {
                     <p>Phone:</p>
                     {
                         isEdit
-                        ? <input type="text" value={userData.phone} onChange={() => setUserData(prev => ({...prev, phone:e.target.value}))}/>
+                        ? <input type="text" value={userData.phone} onChange={(e) => setUserData(prev => ({...prev, phone:e.target.value}))}/>
                         : <p>{userData.phone}</p>
                     }
                     <p>Address:</p>
                     {
                         isEdit
                         ? <p>
-                            <input type="text" value={userData.address.line1} onChange={() => setUserData(prev => ({...prev, address: {...prev.address, line1: e.target.value}}))}/>
+                            <input type="text" value={userData.address.line1} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line1: e.target.value}}))}/>
                             <br />
-                            <input type="text" value={userData.address.line2} onChange={() => setUserData(prev => ({...prev, address: {...prev.address, line2: e.target.value}}))}/>
+                            <input type="text" value={userData.address.line2} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line2: e.target.value}}))}/>
                         </p>
                         : <p>
                             {userData.address.line1}
@@ -61,15 +61,24 @@ const MyProfile = () => {
                 </div>
             </div>
             <div className="">
-                <p>Gender:</p>
-                {
-                    isEdit
-                    ? <select onChange={() => setUserData()}>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                    : <p>{userData.gender}</p>
-                }
+                <p>BASIC INFORMATION</p>
+                <div className="">
+                    <p>Gender:</p>
+                    {
+                        isEdit
+                        ? <select onChange={(e) => setUserData(prev => ({...prev, gender: e.target.value}))}>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        : <p>{userData.gender}</p>
+                    }
+                    <p>Date of Birth:</p>
+                    {
+                        isEdit
+                        ? <input type="date" onChange={(e) => setUserData(prev => ({...prev, DOB: e.target.value}))} />
+                        : <p>{userData.DOB}</p>
+                    }
+                </div>
             </div>
         </div>
     )
