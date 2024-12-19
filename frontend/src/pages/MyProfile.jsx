@@ -23,26 +23,26 @@ const MyProfile = () => {
 
     return (
         <div className='max-w-lg flex flex-col gap-2 text-sm'>
-            <img className='w-36 ' src={userData.image} alt="User Image" />
+            <img className='w-36 rounded' src={userData.image} alt="User Image" />
 
             {
                 isEdit
-                ? <input type="text" value={userData.name} onChange={(e) => setUserData(prev => ({...prev, name:e.target.value}))}/>
-                : <p>{userData.name}</p>
+                ? <input className='bg-gray-200 text-3xl font-medium max-w-60 mt-4  border border-black rounded-md text-black p-3' type="text" value={userData.name} onChange={(e) => setUserData(prev => ({...prev, name:e.target.value}))}/>
+                : <p className='font-medium text-3xl text-neutral-800 mt-4'>{userData.name}</p>
             }
 
-            <hr />
+            <hr className='bg-zinc-400 h-[1px] border-none' />
 
             <div className="">
-                <p>CONTACT INFORMATION</p>
-                <div className="">
-                    <p>Email Id:</p>
-                    <p>{userData.email}</p>
-                    <p>Phone:</p>
+                <p className='text-neutral-500 underline mt-3'>CONTACT INFORMATION</p>
+                <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-2 text-neutral-700">
+                    <p className='font-medium'>Email Id:</p>
+                    <p className='text-blue-500'>{userData.email}</p>
+                    <p className='font-medium'>Phone:</p>
                     {
                         isEdit
-                        ? <input type="text" value={userData.phone} onChange={(e) => setUserData(prev => ({...prev, phone:e.target.value}))}/>
-                        : <p>{userData.phone}</p>
+                        ? <input className='bg-gray-100 max-w-52 border border-black rounded-md text-black p-3' type="text" value={userData.phone} onChange={(e) => setUserData(prev => ({...prev, phone:e.target.value}))}/>
+                        : <p className='text-blue-400'>{userData.phone}</p>
                     }
                     <p>Address:</p>
                     {
