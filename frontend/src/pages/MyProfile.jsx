@@ -22,8 +22,8 @@ const MyProfile = () => {
     const [isEdit, setIsEdit] = useState(false)
 
     return (
-        <div>
-            <img src={userData.image} alt="User Image" />
+        <div className='max-w-lg flex flex-col gap-2 text-sm'>
+            <img className='w-36 ' src={userData.image} alt="User Image" />
 
             {
                 isEdit
@@ -79,6 +79,13 @@ const MyProfile = () => {
                         : <p>{userData.DOB}</p>
                     }
                 </div>
+            </div>
+            <div className="">
+                {
+                    isEdit
+                    ? <button onClick={() => setIsEdit(false)}>Save Information</button>
+                    : <button onClick={() => setIsEdit(true)}>Edit</button>
+                }
             </div>
         </div>
     )
