@@ -47,12 +47,12 @@ const Navbar = () => {
                     : <button onClick={() => navigate("/login")} className='bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block'>Create Account</button>
                 }
                 
-                <img onClick={() => setShowMenu(true)} className='w-6 md:hidden' src={assets.menu_icon} alt="" />
+                <img onClick={() => setShowMenu(true)} className='w-6 md:hidden cursor-pointer' src={assets.menu_icon} alt="" />
                 {/* Mobile Menu */}
                 <div className={`${showMenu ? "fixed w-full" : "h-0 w-0"} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>
                     <div className="flex items-center justify-between px-5 py-6">
                         <img className='w-36' src={assets.logo} alt="Logo" />
-                        <img className='w-7' onClick={() => setShowMenu(false)} src={assets.cross_icon} alt="Cross Icon" />
+                        <img className='w-7 cursor-pointer' onClick={() => setShowMenu(false)} src={assets.cross_icon} alt="Cross Icon" />
                     </div>
                     <ul className='flex flex-col items-center gap-5 mt-5 px-5 text-lg font-medium uppercase'>
                         <NavLink onClick={() => setShowMenu(false)} to={"/"}><p className="px-4 py-2 rounded inline-block">Home</p></NavLink>

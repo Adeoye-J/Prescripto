@@ -27,7 +27,7 @@ const MyProfile = () => {
 
             {
                 isEdit
-                ? <input className='bg-gray-200 text-3xl font-medium max-w-60 mt-4  border border-black rounded-md text-black p-3' type="text" value={userData.name} onChange={(e) => setUserData(prev => ({...prev, name:e.target.value}))}/>
+                ? <input className='bg-gray-200 text-xl font-medium max-w-60 mt-4 outline-primary border border-primary rounded-md text-black p-3' type="text" value={userData.name} onChange={(e) => setUserData(prev => ({...prev, name:e.target.value}))}/>
                 : <p className='font-medium text-3xl text-neutral-800 mt-4'>{userData.name}</p>
             }
 
@@ -41,16 +41,16 @@ const MyProfile = () => {
                     <p className='font-medium'>Phone:</p>
                     {
                         isEdit
-                        ? <input className='bg-gray-100 max-w-52 border border-black rounded-md text-black p-3' type="text" value={userData.phone} onChange={(e) => setUserData(prev => ({...prev, phone:e.target.value}))}/>
+                        ? <input className='bg-gray-100 max-w-52 outline-primary border border-primary rounded-md text-black p-3' type="text" value={userData.phone} onChange={(e) => setUserData(prev => ({...prev, phone:e.target.value}))}/>
                         : <p className='text-blue-400'>{userData.phone}</p>
                     }
                     <p className='font-medium'>Address:</p>
                     {
                         isEdit
                         ? <p>
-                            <input className='bg-gray-50' type="text" value={userData.address.line1} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line1: e.target.value}}))}/>
+                            <input className='bg-gray-50 outline-primary border border-primary rounded-md text-black p-3' type="text" value={userData.address.line1} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line1: e.target.value}}))}/>
                             <br />
-                            <input className='bg-gray-50' type="text" value={userData.address.line2} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line2: e.target.value}}))}/>
+                            <input className='bg-gray-50 outline-primary border border-primary rounded-md text-black p-3' type="text" value={userData.address.line2} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line2: e.target.value}}))}/>
                         </p>
                         : <p className='text-gray-500'>
                             {userData.address.line1}
@@ -66,7 +66,7 @@ const MyProfile = () => {
                     <p className='font-medium'>Gender:</p>
                     {
                         isEdit
-                        ? <select className='max-w-20 bg-gray-100' onChange={(e) => setUserData(prev => ({...prev, gender: e.target.value}))}>
+                        ? <select className='max-w-32 bg-gray-100 outline-primary border border-primary rounded-md text-black p-3' onChange={(e) => setUserData(prev => ({...prev, gender: e.target.value}))}>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -75,7 +75,7 @@ const MyProfile = () => {
                     <p className='font-medium'>Date of Birth:</p>
                     {
                         isEdit
-                        ? <input className='max-w-20 bg-gray-100' type="date" onChange={(e) => setUserData(prev => ({...prev, DOB: e.target.value}))} />
+                        ? <input className='max-w-32 bg-gray-100 outline-primary border border-primary rounded-md text-black p-3' type="date" onChange={(e) => setUserData(prev => ({...prev, DOB: e.target.value}))} />
                         : <p className='text-gray-400'>{userData.DOB}</p>
                     }
                 </div>
