@@ -36,7 +36,7 @@ const addDoctor = async (req, res) => {
         const doctorData = {
             name, 
             email,
-            // image: [imageUrl],
+            // image: imageUrl,
             password: hashedPassword,
             speciality,
             degree,
@@ -59,4 +59,15 @@ const addDoctor = async (req, res) => {
     }
 }
 
-export {addDoctor}
+// API for admin login
+
+const adminLogin = async () => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
+
+export {addDoctor, adminLogin}
