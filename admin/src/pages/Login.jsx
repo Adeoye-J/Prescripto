@@ -18,7 +18,7 @@ const Login = () => {
             if (state === "Admin") {
                 const {data} = await axios.push(backendUrl + "/api/admin/login", {email, password})
                 if (data.success){
-                    console.log()
+                    console.log(data.token)
                 }
             } else {
 
@@ -34,13 +34,13 @@ const Login = () => {
                 <p className='text-2xl font-semibold m-auto'><span className='text-primary'>{state}</span> Login</p>
                 <div className="w-full">
                     <p>Email:</p>
-                    <input value={email} onClick={(e) => setEmail(e.target.value)} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="email" required />
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="email" required />
                 </div>
                 <div className="w-full">
                     <p>Password:</p>
-                    <input value={password} onClick={(e) => setPassword(e.target.value)} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="password" required />
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} className='border border-[#DADADA] rounded w-full p-2 mt-1' type="password" required />
                 </div>
-                <button className='bg-primary text-white w-full py-2 rounded-md text-base'>Login</button>
+                <button type='submit' className='bg-primary text-white w-full py-2 rounded-md text-base'>Login</button>
                 {
                     state === "Admin"
                     ? <p>Doctor Login? <span className='text-primary underline cursor-pointer' onClick={() => setState("Doctor")}>Click here</span></p>
