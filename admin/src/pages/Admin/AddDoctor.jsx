@@ -3,20 +3,20 @@ import { assets } from '../../assets/assets'
 
 const AddDoctor = () => {
     return (
-        <form>
-            <p>Add Doctor</p>
+        <form className='m-5 w-full'>
+            <p className='mb-3 text-lg font-medium'>Add Doctor</p>
 
-            <div className="">
+            <div className="bg-white px-8 py-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
 
-                <div className="">
+                <div className="flex items-center gap-4 mb-8 text-gray-500">
                     <label htmlFor="doc-img">
-                        <img src={assets.upload_area} alt="Upload Area" />
+                        <img className='w-16 bg-gray-100 rounded-full cursor-pointer' src={assets.upload_area} alt="Upload Area" />
                     </label>
                     <input type="file" id="doc-img" hidden />
                     <p>Upload Doctor <br /> Picture</p>
                 </div>
 
-                <div className="">
+                <div className="flex flex-col lg:flex-row items-start gap-10 text-gray-600">
                     <div className="">
 
                         <div className="">
@@ -86,8 +86,10 @@ const AddDoctor = () => {
 
                 <div className="">
                     <p>About Doctor:</p>
-                    <textarea placeholder='About Doctor'></textarea>
+                    <textarea placeholder='About Doctor' rows={5} required></textarea>
                 </div>
+
+                <button>Add Doctor</button>
 
             </div>
         </form>
