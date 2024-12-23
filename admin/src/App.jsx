@@ -1,9 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Login from './pages/Login'
-import { ToastContainer, toast } from 'react-toastify';
-import { useContext } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { AdminContext } from './context/AdminContext';
-import Navbar from '../../frontend/src/components/Navbar';
+import Navbar from './components/Navbar';
 
 const App = () => {
 
