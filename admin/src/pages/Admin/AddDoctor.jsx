@@ -18,18 +18,22 @@ const AddDoctor = () => {
 
                 <div className="">
                     <div className="">
+
                         <div className="">
                             <p>Doctor Name:</p>
                             <input type="text" placeholder='Name' required />
                         </div>
+
                         <div className="">
                             <p>Doctor Email:</p>
                             <input type="email" placeholder='Email' required />
                         </div>
+
                         <div className="">
                             <p>Doctor Password:</p>
                             <input type="password" placeholder='Password' required />
                         </div>
+
                         <div className="">
                             <p>Experience:</p>
                             <select name="" id="">
@@ -45,7 +49,44 @@ const AddDoctor = () => {
                                 <option value="10 Years">10 Years</option>
                             </select>
                         </div>
+
+                        <div className="">
+                            <p>Fees:</p>
+                            <input type="number" placeholder='Fees' required />
+                        </div>
+
                     </div>
+
+                    <div className="">
+                        <div className="">
+                            <p>Speciality:</p>
+                            <select name="" id="">
+                                <option value="General physician">General physician</option>
+                                <option value="Gynecologist">Gynecologist</option>
+                                <option value="Dermatologist">Dermatologist</option>
+                                <option value="Pediatricians">Pediatricians</option>
+                                <option value="Neurologist">Neurologist</option>
+                                <option value="Gastroenterologist">Gastroenterologist</option>
+                            </select>
+                        </div>
+
+                        <div className="">
+                            <p>Education:</p>
+                            <input type="text" placeholder='Education' required />
+                        </div>
+
+                        <div className="">
+                            <p>Address:</p>
+                            <input type="text" placeholder='Address 1' required />
+                            <input type="text" placeholder='Address 2' required />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="">
+                    <p>About Doctor:</p>
+                    <textarea placeholder='About Doctor'></textarea>
                 </div>
 
             </div>
