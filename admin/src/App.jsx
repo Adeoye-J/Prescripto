@@ -3,6 +3,8 @@ import Login from './pages/Login'
 import { ToastContainer } from 'react-toastify';
 import { AdminContext } from './context/AdminContext';
 import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import {Routes, Route} from "react-router-dom"
 
 const App = () => {
 
@@ -12,6 +14,12 @@ const App = () => {
         <div>
             <ToastContainer />
             <Navbar />
+            <div className="flex items-start">
+                <Sidebar />
+                <Routes>
+                    <Route path='/' element={<} />
+                </Routes>
+            </div>
         </div>
     ) : (
         <>
