@@ -12,7 +12,7 @@ const AppContextProvider = (props) => {
 
     const [token, setToken] = useState(localStorage.getItem("token") || "")
 
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState(false)
 
     const getDoctorsData = async () => {
         try {
@@ -32,7 +32,7 @@ const AppContextProvider = (props) => {
         try {
             const {data} = await axios.get(backendUrl + "/api/user/get-profile", {headers: {token}})
             if (data.success) {
-                console.log(data.userData)
+                // console.log(data.userData)
                 setUserData(data.userData)
             } else {
                 toast.error(data.message)
@@ -44,27 +44,35 @@ const AppContextProvider = (props) => {
         }
     }
 
-    const updateUserData = async () => {
-        try {
-            const {data} = await axios.post(backendUrl + "/api/user/update-profile", {userData}, {headers: {token}})
-            if(data.success) {
-                toast.success(data.message)
-            } else {
-                toast.error(data.message)
-            }
-        } catch (error) {
-            toast.error(error.message)
-            console.log(error);
-        }
-    }
+    // const updateUserData = async () => {
+    //     try {
+    //         const {data} = await axios.post(backendUrl + "/api/user/update-profile", {userData}, {headers: {token}})
+    //         if(data.success) {
+    //             toast.success(data.message)
+    //         } else {
+    //             toast.error(data.message)
+    //         }
+    //     } catch (error) {
+    //         toast.error(error.message)
+    //         console.log(error);
+    //     }
+    // }
 
     useEffect(() => {
         getDoctorsData()
     }, [])
 
+    useEffect(() => {
+        if (token) {
+            getUserData()
+        } else {
+            setUserData(false)
+        }
+    }, [token])
+
     const currencySymbol = "$"
 
-    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, setUserData, updateUserData}
+    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, setUserData}
 
     return (
         <AppContext.Provider value={value}>
