@@ -15,7 +15,13 @@ const authUser = async (req, res, next) => {
         //     return res.json({success: false, message: "Not Authorized - Wrong token"})
         // }
 
-        
+        // const {userId} = req.body
+
+        // if(token_decode !== userId) {
+        //     return res.json({success: false, message: "Not Authorized - Wrong token"})
+        // }
+
+        req.body.userId = token_decode.id
 
         next()
     } catch (error) {
