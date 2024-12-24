@@ -55,14 +55,19 @@ const AddDoctor = () => {
                 setName("")
                 setPassword("")
                 setEmail("")
-                setaddre
+                setAddress1("")
+                setAddress2("")
+                setDegree("")
+                // setAbout("")
+                setFees("")
             } else {
                 toast.error(data.message)
             }
             
 
         } catch (error) {
-            
+            toast.error(error.message)
+            console.log(error)
         }
     }
 
