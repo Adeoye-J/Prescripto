@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 // import { doctors } from "../assets/assets";
+import {toast} from "react-toastify"
 import axios from "axios"
 
 export const AppContext = createContext()
@@ -14,10 +15,11 @@ const AppContextProvider = (props) => {
             const {data} = await axios.get(backendUrl + "/api/doctor/list")
             if (data.success) {
                 setDoctors(data.doctors)
+            } else {
+                toast.error(data.message)
             }
-            
         } catch (error) {
-            toast
+            toast.error(error.message)
             console.log(error);
             
         }
