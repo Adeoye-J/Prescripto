@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const MyProfile = () => {
 
@@ -38,9 +40,19 @@ const MyProfile = () => {
             image && formData.append("image", image)
 
             const {data} = await axios.post(backendUrl + "/api/user/update-profile", formData, {headers: {token}})
+            if (data.success) {
+                toast.success(data.message)
+                await getUserData()
+                setIsEdit(false)
+                // setImage(false)
+            } else {
+                toast.error(data.message)
+            }
+
 
         } catch (error) {
-            
+            console.log(error)
+            toast.error(error.message)
         }
 
     }
@@ -120,8 +132,7 @@ const MyProfile = () => {
             <div className="mt-10">
                 {
                     isEdit
-                    // ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={() => {updateUserData(); setIsEdit(false)}}>Save Information</button>
-                    ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={() => {setIsEdit(false); updateUserData()}}>Save Information</button>
+                    ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={updateUserData}>Save Information</button>
                     : <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={() => setIsEdit(true)}>Edit</button>
                 }
             </div>
