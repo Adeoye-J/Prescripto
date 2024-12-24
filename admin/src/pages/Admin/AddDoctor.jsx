@@ -55,11 +55,13 @@ const AddDoctor = () => {
                 setName("")
                 setPassword("")
                 setEmail("")
-                // setAddress1("")
-                // setAddress2("")
-                // setDegree("")
-                // setAbout("")
+                setAddress1("")
+                setAddress2("")
+                setDegree("")
+                setAbout("")
                 setFees("")
+                setSpeciality("General physician")
+                setExperience("1 Year")
             } else {
                 toast.error(data.message)
             }
