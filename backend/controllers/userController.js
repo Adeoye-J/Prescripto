@@ -76,10 +76,30 @@ const getProfile = async (req, res) => {
     try {
         
         const {userId} = req.body
+        const userData = await userModel.findById(userId).select("-password")
+
+        res.json({success: true, userData})
 
     } catch (error) {
-        
+        console.log(error)
+        res.json({success: false, message: error.message})
     }
 }
+
+// API for updating user profile
+
+const updateProfile = async (req, res) => {
+
+    try {
+        const {name, image, address, gender, dob, phone} = req.body
+        
+        
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
+
+
 
 export {registerUser, userLogin, getProfile}
