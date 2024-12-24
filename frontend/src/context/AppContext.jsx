@@ -64,7 +64,7 @@ const AppContextProvider = (props) => {
 
     const currencySymbol = "$"
 
-    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, updateUserData}
+    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, setUserData, updateUserData}
 
     return (
         <AppContext.Provider value={value}>
