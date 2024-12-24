@@ -31,13 +31,13 @@ const addDoctor = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt)
 
         // Upload image to cloudinary
-        // const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: "image"})
-        // const imageUrl = imageUpload.secure_url
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: "image"})
+        const imageUrl = imageUpload.secure_url
 
         const doctorData = {
             name, 
             email,
-            // image: imageUrl,
+            image: imageUrl,
             password: hashedPassword,
             speciality,
             degree,
