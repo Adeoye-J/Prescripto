@@ -21,13 +21,29 @@ const MyProfile = () => {
     // })
 
     // const {userData, setUserData, updateUserData} = useContext(AppContext)
-    const {userData, setUserData} = useContext(AppContext)
+    const {userData, setUserData, token, getUserData, backendUrl} = useContext(AppContext)
+    const [image, setImage] = useState(false)
+
+    const updateUserData = async () => {
+
+    }
 
     const [isEdit, setIsEdit] = useState(false)
 
     return userData && (
         <div className='max-w-lg flex flex-col gap-2 text-sm'>
-            <img className='w-36 rounded' src={userData.image} alt="User Image" />
+
+            {
+                isEdit 
+                ? <label htmlFor="image">
+                    <div className="">
+                        <img src="" alt="" />
+                        <img src="" alt="" />
+                    </div>
+                    <input onChange={(e) => setImage(e.target.files[0])} type="file" id='image' hidden/>
+                </label>
+                : <img className='w-36 rounded' src={userData.image} alt="User Image" />
+            }
 
             {
                 isEdit
