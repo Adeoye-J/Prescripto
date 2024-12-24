@@ -1,7 +1,21 @@
 import React from 'react'
 import { assets } from '../../assets/assets'
+import { useState } from 'react'
 
 const AddDoctor = () => {
+
+    const [docImg, setDocImg] = useState(false)
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [experience, setExperience] = useState("1 Year")
+    const [fee, setFee] = useState("")
+    const [about, setAbout] = useState("")
+    const [speciality, setSpeciality] = useState("General physician")
+    const [degree, setDegree] = useState("")
+    const [address1, setAddress1] = useState("")
+    const [address2, setAddress2] = useState("")
+
     return (
         <form className='m-5 w-full'>
             <p className='mb-3 text-lg font-medium'>Add Doctor</p>
@@ -12,7 +26,7 @@ const AddDoctor = () => {
                     <label htmlFor="doc-img">
                         <img className='w-16 bg-gray-100 rounded-full cursor-pointer' src={assets.upload_area} alt="Upload Area" />
                     </label>
-                    <input type="file" id="doc-img" hidden />
+                    <input value={docImg} onChange={(event) => setDocImg(event.target.files[0])} type="file" id="doc-img" hidden />
                     <p>Upload Doctor <br /> Picture</p>
                 </div>
 
@@ -85,11 +99,11 @@ const AddDoctor = () => {
                 </div>
 
                 <div className="">
-                    <p>About Doctor:</p>
-                    <textarea placeholder='About Doctor' rows={5} required></textarea>
+                    <p className='mt-4 mb-2'>About Doctor:</p>
+                    <textarea className='w-full px-4 pt-2 border rounded' placeholder='About Doctor' rows={5} required></textarea>
                 </div>
 
-                <button>Add Doctor</button>
+                <button className='bg-primary px-10 py-3 mt-4 text-white rounded-full'>Add Doctor</button>
 
             </div>
         </form>
