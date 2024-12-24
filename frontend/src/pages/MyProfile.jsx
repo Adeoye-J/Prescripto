@@ -20,7 +20,7 @@ const MyProfile = () => {
     //     DOB: "2300-01-23"
     // })
 
-    const {userData} = useContext(AppContext)
+    const {userData, setUserData, updateUserData} = useContext(AppContext)
 
     const [isEdit, setIsEdit] = useState(false)
 
@@ -86,7 +86,7 @@ const MyProfile = () => {
             <div className="mt-10">
                 {
                     isEdit
-                    ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={() => setIsEdit(false)}>Save Information</button>
+                    ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={() => {updateUserData(); setIsEdit(false)}}>Save Information</button>
                     : <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all' onClick={() => setIsEdit(true)}>Edit</button>
                 }
             </div>

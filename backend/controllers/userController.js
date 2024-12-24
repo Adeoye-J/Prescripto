@@ -93,7 +93,7 @@ const updateProfile = async (req, res) => {
 
     try {
         const {userId, name, address, gender, dob, phone} = req.body
-        // const userData = await userModel.findById(userId)
+        
         const imageFile = req.file
 
         if (!name || !phone || !dob || !gender) {
