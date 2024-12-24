@@ -36,9 +36,9 @@ const MyProfile = () => {
             {
                 isEdit 
                 ? <label htmlFor="image">
-                    <div className="">
-                        <img src="" alt="" />
-                        <img src="" alt="" />
+                    <div className="inline-block relative cursor-pointer">
+                        <img className='w-36' src={image ? URL.createObjectURL(image) : userData.image} alt="" />
+                        <img src={image ? "" : assets.upload_icon} alt="" />
                     </div>
                     <input onChange={(e) => setImage(e.target.files[0])} type="file" id='image' hidden/>
                 </label>
