@@ -20,7 +20,7 @@ const MyProfile = () => {
     //     DOB: "2300-01-23"
     // })
 
-    const {userData, setUserData} = useContext(AppContext)
+    const {userData} = useContext(AppContext)
 
     const [isEdit, setIsEdit] = useState(false)
 
