@@ -91,8 +91,14 @@ const getProfile = async (req, res) => {
 const updateProfile = async (req, res) => {
 
     try {
-        const {name, image, address, gender, dob, phone} = req.body
-        
+        const {userId, name, address, gender, dob, phone} = req.body
+        // const userData = await userModel.findById(userId)
+
+        if (!name || !phone || !dob || !gender) {
+            return res.json({success: false, message: "Missing "})
+        }
+
+        await userModel.findByIdAndUpdate(userId, {name, gender, dob, phone, address: JSON.parse(address)})
         
     } catch (error) {
         console.log(error)
