@@ -15,7 +15,24 @@ const DoctorsList = () => {
 
     return (
         <div>
-            
+            <h1>All Doctors</h1>
+
+            <div className="">
+                {
+                    doctors.map((item, index) => (
+                        <div className="">
+                            <img src={item.image} alt="Doctors Image" />
+                            <div className="">
+                                <p>{item.name}</p>
+                                <p>{item.speciality}</p>
+                                <div className="">
+                                    <input type="checkbox" checked={item.available} />
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     )
 }
