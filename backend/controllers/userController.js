@@ -1,5 +1,9 @@
 import validator from "validator"
 import bcrypt from "bcrypt"
+import userModel from "../models/userModel.js"
+import jwt from "jsonwebtoken"
+
+
 // API to Register New User
 
 const registerUser = async (req, res) => {
@@ -28,6 +32,12 @@ const registerUser = async (req, res) => {
             email,
             password: hashedPassword
         }
+
+        const newUser = new userModel(userData)
+        const user = await newUser.save()
+
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
+        res.json({success: true, token})
 
 
     } catch (error) {
