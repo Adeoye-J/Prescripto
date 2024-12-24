@@ -71,4 +71,15 @@ const userLogin = async (req, res) => {
     }
 }
 
-export {registerUser, userLogin}
+// API to get user profile details
+const getProfile = async (req, res) => {
+    try {
+        
+        const {userId} = req.body
+
+    } catch (error) {
+        
+    }
+}
+
+export {registerUser, userLogin, getProfile}

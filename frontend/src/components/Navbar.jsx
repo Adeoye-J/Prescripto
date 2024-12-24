@@ -12,7 +12,7 @@ const Navbar = () => {
     const {token, setToken} = useContext(AppContext)
 
     const logout = () => {
-        setToken(false)
+        setToken("")
         localStorage.removeItem("token")
     }
 
