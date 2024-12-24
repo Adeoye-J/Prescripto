@@ -13,7 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
 
-    const {token, setToken, backendUrl} = useContext(AppContext)
+    const {token, setToken, backendUrl, getUserData} = useContext(AppContext)
 
     const onSubmitHandler = async (event) => {
         event.preventDefault()
@@ -45,6 +45,7 @@ const Login = () => {
 
     useEffect(() => {
         if (token) {
+            getUserData()
             navigate("/")
         }
     }, [token])

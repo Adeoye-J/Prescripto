@@ -12,6 +12,7 @@ const AppContextProvider = (props) => {
 
     const [token, setToken] = useState(localStorage.getItem("token") || "")
 
+    const [userData, setUserData] = useState("")
 
     const getDoctorsData = async () => {
         try {
@@ -28,14 +29,28 @@ const AppContextProvider = (props) => {
         }
     }
 
+    const getUserData = async () => {
+        try {
+            const {data} = await axios.post(backendUrl + "/api/doctor/get-profile", {}, {headers: {token}})
+            if (data.success) {
+                setUserData(data.userData)
+            } else {
+                toast.error(data.message)
+            }
+
+        } catch (error) {
+            toast.error(error.message)
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         getDoctorsData()
     }, [])
 
-
     const currencySymbol = "$"
 
-    const value = {doctors, currencySymbol, token, setToken, backendUrl}
+    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData}
 
     return (
         <AppContext.Provider value={value}>

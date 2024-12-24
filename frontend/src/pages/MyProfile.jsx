@@ -3,21 +3,25 @@ import { assets } from '../assets/assets'
 
 const MyProfile = () => {
 
-    const [userData, setUserData] = useState({
-        name: "Jeremiah Bankole",
-        image: assets.profile_pic,
-        email: "bankolejeremiahadeoye@gmail.com",
-        phone: "-23 4335 35454",
-        address: {
-            line1: "First Line Address Comes Here",
-            line2: "Second Line Address Comes Here",
-            city: "City Name",
-            state: "State Name",
-            zip: "ZIP Code"
-        },
-        gender: "Male",
-        DOB: "2300-01-23"
-    })
+    // const [userData, setUserData] = useState({
+    //     name: "Jeremiah Bankole",
+    //     image: assets.profile_pic,
+    //     email: "bankolejeremiahadeoye@gmail.com",
+    //     phone: "-23 4335 35454",
+    //     address: {
+    //         line1: "First Line Address Comes Here",
+    //         line2: "Second Line Address Comes Here",
+    //         city: "City Name",
+    //         state: "State Name",
+    //         zip: "ZIP Code"
+    //     },
+    //     gender: "Male",
+    //     DOB: "2300-01-23"
+    // })
+
+    const 
+
+    
 
     const [isEdit, setIsEdit] = useState(false)
 
