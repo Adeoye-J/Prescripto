@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
+import { AppContext } from '../context/AppContext'
 
 const MyProfile = () => {
 
@@ -19,9 +20,7 @@ const MyProfile = () => {
     //     DOB: "2300-01-23"
     // })
 
-    const 
-
-    
+    const {userData, setUserData} = useContext(AppContext)
 
     const [isEdit, setIsEdit] = useState(false)
 

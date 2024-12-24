@@ -31,8 +31,9 @@ const AppContextProvider = (props) => {
 
     const getUserData = async () => {
         try {
-            const {data} = await axios.post(backendUrl + "/api/doctor/get-profile", {}, {headers: {token}})
+            const {data} = await axios.get(backendUrl + "/api/user/get-profile", {}, {headers: {token}})
             if (data.success) {
+                console.log(data.userData)
                 setUserData(data.userData)
             } else {
                 toast.error(data.message)
@@ -50,7 +51,7 @@ const AppContextProvider = (props) => {
 
     const currencySymbol = "$"
 
-    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData}
+    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData}
 
     return (
         <AppContext.Provider value={value}>
