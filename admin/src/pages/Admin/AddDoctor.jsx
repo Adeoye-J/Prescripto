@@ -55,9 +55,9 @@ const AddDoctor = () => {
                 setName("")
                 setPassword("")
                 setEmail("")
-                setAddress1("")
-                setAddress2("")
-                setDegree("")
+                // setAddress1("")
+                // setAddress2("")
+                // setDegree("")
                 // setAbout("")
                 setFees("")
             } else {
