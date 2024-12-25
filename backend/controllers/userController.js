@@ -124,57 +124,123 @@ const updateProfile = async (req, res) => {
 
 const bookAppointment = async (req, res) => {
     try {
-        const {userId, docId, slotDate, slotTime} = req.body
+        const { userId, docId, slotDate, slotTime } = req.body;
 
-        const docData = await doctorModel.findById(docId).select("-password")
-
-        if(!docData.available) {
-            return res.json({success: false, message: "Doctor Unavailable for Appointment at the moment, try again later."})
+        if (!userId || !docId || !slotDate || !slotTime) {
+            return res.json({ success: false, message: "Missing required fields." });
         }
 
-        let slots_booked = docData.slots_booked
+        const docData = await doctorModel.findById(docId).select("-password");
+        if (!docData) {
+            return res.json({ success: false, message: "Doctor not found." });
+        }
+
+        if (!docData.available) {
+            return res.json({
+                success: false,
+                message: "Doctor unavailable for appointment at the moment, try again later."
+            });
+        }
+
+        let slots_booked = docData.slots_booked;
 
         // Checking for slots availability
-
-        if(slots_booked[slotDate]) {
-            if(slots_booked[slotDate].includes(slotTime)) {
-                return res.json({success: false, message: "Slot Date or Time Filled"})
+        if (slots_booked[slotDate]) {
+            if (slots_booked[slotDate].includes(slotTime)) {
+                return res.json({ success: false, message: "Slot date or time filled." });
             } else {
-                slots_booked[slotDate].push(slotTime)
+                slots_booked[slotDate].push(slotTime);
             }
         } else {
-            slots_booked[slotDate] = []
-            slots_booked[slotDate].push(slotTime)
+            slots_booked[slotDate] = [slotTime];
         }
 
-        const userData = await userModel.findById(userId).select("-password")
+        const userData = await userModel.findById(userId).select("-password");
+        if (!userData) {
+            return res.json({ success: false, message: "User not found." });
+        }
 
-        delete docData.slots_booked
-
+        // Prepare the appointment data
         const appointmentData = {
-            userId, 
+            userId,
             docId,
             userData,
-            docData,
+            docData: { ...docData, slots_booked: undefined }, // Avoid including slots_booked
             amount: docData.fees,
             slotTime,
             slotDate,
             date: Date.now()
-        }
+        };
 
-        const newAppointment = new appointmentModel(appointmentData)
-        await newAppointment.save()
+        // Save the appointment
+        const newAppointment = new appointmentModel(appointmentData);
+        await newAppointment.save();
 
-        // Save new slots data in docData
-        await doctorModel.findById(docId, {slots_booked})
+        // Update the doctor's slots
+        await doctorModel.findByIdAndUpdate(docId, { slots_booked });
 
-        res.json({success: true, message: "Appointment Booked"})
+        res.json({ success: true, message: "Appointment booked successfully." });
 
     } catch (error) {
-        console.log(error)
-        res.json({success: false, message: error.message})
+        console.error(error);
+        res.json({ success: false, message: "An error occurred while booking the appointment." });
     }
-}
+};
+
+
+// const bookAppointment = async (req, res) => {
+//     try {
+//         const {userId, docId, slotDate, slotTime} = req.body
+
+//         const docData = await doctorModel.findById(docId).select("-password")
+
+//         if(!docData.available) {
+//             return res.json({success: false, message: "Doctor Unavailable for Appointment at the moment, try again later."})
+//         }
+
+//         let slots_booked = docData.slots_booked
+
+//         // Checking for slots availability
+
+//         if(slots_booked[slotDate]) {
+//             if(slots_booked[slotDate].includes(slotTime)) {
+//                 return res.json({success: false, message: "Slot Date or Time Filled"})
+//             } else {
+//                 slots_booked[slotDate].push(slotTime)
+//             }
+//         } else {
+//             slots_booked[slotDate] = []
+//             slots_booked[slotDate].push(slotTime)
+//         }
+
+//         const userData = await userModel.findById(userId).select("-password")
+
+//         delete docData.slots_booked
+
+//         const appointmentData = {
+//             userId, 
+//             docId,
+//             userData,
+//             docData,
+//             amount: docData.fees,
+//             slotTime,
+//             slotDate,
+//             date: Date.now()
+//         }
+
+//         const newAppointment = new appointmentModel(appointmentData)
+//         await newAppointment.save()
+
+//         // Save new slots data in docData
+//         await doctorModel.findById(docId, {slots_booked})
+
+//         res.json({success: true, message: "Appointment Booked"})
+
+//     } catch (error) {
+//         console.log(error)
+//         res.json({success: false, message: error.message})
+//     }
+// }
 
 
 
