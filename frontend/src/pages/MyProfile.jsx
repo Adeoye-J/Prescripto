@@ -114,7 +114,7 @@ const MyProfile = () => {
                     <p className='font-medium'>Gender:</p>
                     {
                         isEdit
-                        ? <select className='max-w-32 bg-gray-100 outline-primary border border-primary rounded-md text-black p-3' onChange={(e) => setUserData(prev => ({...prev, gender: e.target.value}))}>
+                        ? <select className='max-w-32 bg-gray-100 outline-primary border border-primary rounded-md text-black p-3' value={userData.gender} onChange={(e) => setUserData(prev => ({...prev, gender: e.target.value}))}>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -123,8 +123,8 @@ const MyProfile = () => {
                     <p className='font-medium'>Date of Birth:</p>
                     {
                         isEdit
-                        ? <input className='max-w-32 bg-gray-100 outline-primary border border-primary rounded-md text-black p-3' type="date" onChange={(e) => setUserData(prev => ({...prev, DOB: e.target.value}))} />
-                        : <p className='text-gray-400'>{userData.DOB}</p>
+                        ? <input className='max-w-32 bg-gray-100 outline-primary border border-primary rounded-md text-black p-3' type="date" value={userData.dob} onChange={(e) => setUserData(prev => ({...prev, dob: e.target.value}))} />
+                        : <p className='text-gray-400'>{userData.dob}</p>
                     }
                 </div>
             </div>
