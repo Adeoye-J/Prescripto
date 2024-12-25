@@ -96,11 +96,11 @@ const MyProfile = () => {
                     <p className='font-medium'>Address:</p>
                     {
                         isEdit
-                        ? <p>
+                        ? <div>
                             <input className='bg-gray-50 outline-primary border border-primary rounded-md text-black p-3' type="text" value={userData.address.line1} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line1: e.target.value}}))}/>
                             <br />
                             <input className='bg-gray-50 outline-primary border border-primary rounded-md text-black p-3' type="text" value={userData.address.line2} onChange={(e) => setUserData(prev => ({...prev, address: {...prev.address, line2: e.target.value}}))}/>
-                        </p>
+                        </div>
                         : <p className='text-gray-500'>
                             {userData.address.line1}
                             <br />
