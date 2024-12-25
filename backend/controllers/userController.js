@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import userModel from "../models/userModel.js"
 import jwt from "jsonwebtoken"
 import {v2 as cloudinary} from "cloudinary"
+import doctorModel from "../models/doctorModel.js"
 
 
 // API to Register New User
@@ -112,6 +113,21 @@ const updateProfile = async (req, res) => {
 
         res.json({success: true, message: "Profile Successfully Updated"})
 
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
+
+// API to book appointment
+
+const bookAppointment = async (req, res) => {
+    try {
+        const {userId, docId, slotDate, slotTime} = req.body
+
+        const docData = await doctorModel.findById(docId).select("-password")
+
+        
     } catch (error) {
         console.log(error)
         res.json({success: false, message: error.message})
