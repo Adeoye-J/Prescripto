@@ -44,20 +44,6 @@ const AppContextProvider = (props) => {
         }
     }
 
-    // const updateUserData = async () => {
-    //     try {
-    //         const {data} = await axios.post(backendUrl + "/api/user/update-profile", {userData}, {headers: {token}})
-    //         if(data.success) {
-    //             toast.success(data.message)
-    //         } else {
-    //             toast.error(data.message)
-    //         }
-    //     } catch (error) {
-    //         toast.error(error.message)
-    //         console.log(error);
-    //     }
-    // }
-
     useEffect(() => {
         getDoctorsData()
     }, [])

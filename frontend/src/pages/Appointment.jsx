@@ -4,6 +4,7 @@ import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets'
 import RelatedDoctors from '../components/RelatedDoctors'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const Appointment = () => {
 
@@ -72,7 +73,15 @@ const Appointment = () => {
 
         try {
             
-            const date = docSlots[slotIndex][0]
+            const date = docSlots[slotIndex][0].datetime
+
+            let day = date.getDate()
+            let month = date.getMonth() + 1
+            let year = date.getFullYear()
+
+            const slotDate = day + "_" + month + "_" + year
+            
+            const {data} = await axios.post(backendUrl + "/api/user/book-appointment", {docId, slotDate, slotTime}, {headers: {token}})
 
         } catch (error) {
             
