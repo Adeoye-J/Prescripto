@@ -78,8 +78,6 @@ const getProfile = async (req, res) => {
         
         const {userId} = req.body
         const userData = await userModel.findById(userId).select("-password")
-
-        console.log(userData);
         
         res.json({success: true, userData})
 
@@ -112,7 +110,6 @@ const updateProfile = async (req, res) => {
             await userModel.findByIdAndUpdate(userId, {image: imageUrl})
         }
 
-        console.log(name)
         res.json({success: true, message: "Profile Successfully Updated"})
 
     } catch (error) {
