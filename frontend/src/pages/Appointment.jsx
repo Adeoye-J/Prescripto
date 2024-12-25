@@ -10,7 +10,7 @@ const Appointment = () => {
     const navigate = useNavigate()
     const {docId} = useParams()
     const {doctors, currencySymbol, backendUrl, token, getDoctorsData} = useContext(AppContext)
-    const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT1"]
+    const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
     const [docInfo, setDocInfo] = useState(null)
     const [docSlots, setDocSlots] = useState([])
@@ -20,7 +20,6 @@ const Appointment = () => {
     const fetchDocInfo = async () => {
         const docInfo = doctors.find(doc => doc._id === docId)
         setDocInfo(docInfo)
-        // console.log(docInfo)
     }
 
     const getAvailableSlots = () => {
