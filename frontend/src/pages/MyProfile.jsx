@@ -22,7 +22,6 @@ const MyProfile = () => {
     //     DOB: "2300-01-23"
     // })
 
-    // const {userData, setUserData, updateUserData} = useContext(AppContext)
     const {userData, setUserData, token, getUserData, backendUrl} = useContext(AppContext)
     const [image, setImage] = useState(false)
 
@@ -44,7 +43,7 @@ const MyProfile = () => {
                 toast.success(data.message)
                 await getUserData()
                 setIsEdit(false)
-                // setImage(false)
+                setImage(false)
             } else {
                 toast.error(data.message)
             }
