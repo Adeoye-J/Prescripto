@@ -127,7 +127,29 @@ const bookAppointment = async (req, res) => {
 
         const docData = await doctorModel.findById(docId).select("-password")
 
-        
+        if(!docData.available) {
+            return res.json({success: false, message: "Doctor Unavailable for Appointment at the moment, try again later."})
+        }
+
+        let slots_booked = docData.slots_booked
+
+        // Checking for slots availability
+
+        if(slots_booked[slotDate]) {
+            if(slots_booked[slotDate].includes(slotTime)) {
+                return res.json({success: false, message: "Slot Date or Time Filled"})
+            } else {
+                slots_booked[slotDate].push(slotTime)
+            }
+        } else {
+            slots_booked[slotDate] = []
+            slots_booked[slotDate].push(slotTime)
+        }
+
+        const userData = await userModel.findById(userId).select("-password")
+
+        delete docData.slots_booked
+
     } catch (error) {
         console.log(error)
         res.json({success: false, message: error.message})
