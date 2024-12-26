@@ -188,7 +188,7 @@ const bookAppointment = async (req, res) => {
 };
 
 // API to get user appointments
-const userAppoinments async (req, res) => {
+const userAppoinments = async (req, res) => {
     try {
         
         const {userId} = req.body
@@ -202,4 +202,4 @@ const userAppoinments async (req, res) => {
     }
 }
 
-export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, user}
+export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppoinments}
