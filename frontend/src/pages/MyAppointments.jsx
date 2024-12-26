@@ -7,6 +7,12 @@ const MyAppointments = () => {
     const {doctors, backendUrl, token} = useContext(AppContext)
 
     const [appointments, setAppointments] = useState([])
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+    const slotDateFormat = (slotDate) => {
+        const dateArray = slotDate.split("_")
+        return dateArray(0) + " " + date
+    }
 
     const getUserAppointments = async () => {
         try {
@@ -44,7 +50,8 @@ const MyAppointments = () => {
                                 <p className='text-zinc-700 font-medium mt-1'>Address</p>
                                 <p className='text-xs'>{item.docData.address.line1}</p>
                                 <p className='text-xs'>{item.docData.address.line2}</p>
-                                <p className='text-xs mt-1'><span className='text-sm text-neutral-700 font-medium'>Date & Time:</span> 25 July, 2024 | 8:30 PM</p>
+                                <p className='text-xs mt-1'><span className='text-sm text-neutral-700 font-medium'>Date & Time:</span> {item.slotDate} | {item.slotTime}</p>
+                                {/* <p className='text-xs mt-1'><span className='text-sm text-neutral-700 font-medium'>Date & Time:</span> 25 July, 2024 | 8:30 PM</p> */}
                             </div>
                             <div className=""></div>
                             <div className="flex flex-col gap-2 justify-end">
