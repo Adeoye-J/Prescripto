@@ -202,4 +202,25 @@ const userAppoinments = async (req, res) => {
     }
 }
 
+// API to cancel appoinment
+const cancelAppointment = async (req, res) => {
+    try {
+        
+        const {userId, appointmentId} = req.body
+        const appointmentData = await appointmentModel.findById(appointmentId)
+        
+        // Verify appointment user
+        if (appointmentData.userId !== userId) {
+            return res.json({success: false, message: "Unauthorized action"})
+        }
+
+        
+
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: "An error occurred while requesting appointments." });
+    }
+}
+
+
 export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppoinments}
