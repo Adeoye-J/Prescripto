@@ -28,6 +28,17 @@ const MyAppointments = () => {
         }
     }
 
+    const cancelAppointment = async (appointmentId) => {
+        try {
+            // console.log(appointmentId);
+            const {data} = await axios.post(backendUrl +  "/api/user/cancel-appointment", {appointmentId}, {headers: {token}})
+            
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
+
     useEffect(() => {
         if (token) {
             getUserAppointments()
@@ -56,7 +67,7 @@ const MyAppointments = () => {
                             <div className=""></div>
                             <div className="flex flex-col gap-2 justify-end">
                                 <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
-                                <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
+                                <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
                             </div>
                         </div>
                     ))
