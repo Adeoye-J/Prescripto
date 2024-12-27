@@ -52,11 +52,7 @@ const MyAppointments = () => {
     const handlePayment = async (appointmentId) => {
         const stripe = await stripePromise; // Ensure Stripe.js is loaded
         try {
-            const { data } = await axios.post(
-                `${backendUrl}/api/user/make-payment`, 
-                { appointmentId }, 
-                { headers: { token } }
-            );
+            const { data } = await axios.post(backendUrl + "/api/user/make-payment", { appointmentId }, { headers: { token } } );
 
             // if (data.success && data.session) {
             //     // Redirect to Stripe Checkout
@@ -66,6 +62,7 @@ const MyAppointments = () => {
             // }
 
             if (data.success) {
+                window.location.href = data.session.url;
                 await stripe.redirectToCheckout({ sessionId: data.session.id });
             } else {
                 toast.error(data.message);
