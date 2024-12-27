@@ -47,7 +47,10 @@ const MyAppointments = () => {
         }
     }
 
+    const stripePromise = loadStripe('pk_test_51QaLFBAHbRfNobUMeYPuFzmVmFqafGotHCACW3qPw5F89jvpxMZzEvR1OHFdH7zXrPNByoRWJVtxskGEd4em2Z0Z00llhVkXru');
+
     const handlePayment = async (appointmentId) => {
+        const stripe = await stripePromise; // Ensure Stripe.js is loaded
         try {
             const { data } = await axios.post(
                 `${backendUrl}/api/user/make-payment`, 
@@ -55,12 +58,19 @@ const MyAppointments = () => {
                 { headers: { token } }
             );
 
-            if (data.success && data.session) {
-                // Redirect to Stripe Checkout
-                window.location.href = data.session.url;
+            // if (data.success && data.session) {
+            //     // Redirect to Stripe Checkout
+            //     window.location.href = data.session.url;
+            // } else {
+            //     toast.error(data.message || "Unable to initiate payment.");
+            // }
+
+            if (data.success) {
+                await stripe.redirectToCheckout({ sessionId: data.session.id });
             } else {
-                toast.error(data.message || "Unable to initiate payment.");
+                toast.error(data.message);
             }
+
         } catch (error) {
             console.error(error);
             toast.error(error.message);
@@ -95,7 +105,7 @@ const MyAppointments = () => {
                             <div className=""></div>
                             <div className="flex flex-col gap-2 justify-end">
                                 {!item.cancelled
-                                    && <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
+                                    && <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
                                 }
                                 {
                                 !item.cancelled 

@@ -283,7 +283,7 @@ const makePayment = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.json({ success: false, message: "An error occurred." });
+        res.json({ success: false, message: "Payment failed. Please try again." });
     }
 }
 
