@@ -13,12 +13,12 @@ userRouter.post("/update-profile", upload.single("image"), authUser, updateProfi
 userRouter.post("/book-appointment", authUser, bookAppointment)
 userRouter.get("/user-appointments", authUser, userAppointments)
 userRouter.post("/cancel-appointment", authUser, cancelAppointment)
-userRouter.post("/checkout", authUser, makePayment)
-userRouter.post("/checkout-success", (req, res) => {
-    return res.json({success: true, message: "Payment Successful"})
-})
-userRouter.post("/checkout-cancelled", (req, res) => {
-    return res.json({success: false, message: "Payment Cancelled"})
+userRouter.post("/make-payment", authUser, makePayment)
+// userRouter.post("/checkout-success", (req, res) => {
+//     return res.json({success: true, message: "Payment Successful"})
+// })
+// userRouter.post("/checkout-cancelled", (req, res) => {
+//     return res.json({success: false, message: "Payment Cancelled"})
 })
 
 export default userRouter

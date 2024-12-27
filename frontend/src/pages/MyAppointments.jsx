@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { loadStripe } from '@stripe/stripe-js';
 
 const MyAppointments = () => {
 
@@ -45,6 +46,26 @@ const MyAppointments = () => {
             toast.error(error.message)
         }
     }
+
+    const handlePayment = async (appointmentId) => {
+        try {
+            const { data } = await axios.post(
+                `${backendUrl}/api/user/make-payment`, 
+                { appointmentId }, 
+                { headers: { token } }
+            );
+
+            if (data.success && data.session) {
+                // Redirect to Stripe Checkout
+                window.location.href = data.session.url;
+            } else {
+                toast.error(data.message || "Unable to initiate payment.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message);
+        }
+    };
 
     useEffect(() => {
         if (token) {
