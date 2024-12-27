@@ -62,7 +62,7 @@ const MyAppointments = () => {
             // }
 
             if (data.success) {
-                window.location.href = data.session.url;
+                // window.location.href = data.session.url;
                 await stripe.redirectToCheckout({ sessionId: data.session.id });
             } else {
                 toast.error(data.message);
