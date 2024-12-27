@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 import {v2 as cloudinary} from "cloudinary"
 import doctorModel from "../models/doctorModel.js"
 import appointmentModel from "../models/appointmentModel.js"
-import razorpay from "razorpay"
+// import razorpay from "razorpay"
 
 
 // API to Register New User
@@ -236,20 +236,56 @@ const cancelAppointment = async (req, res) => {
     }
 }
 
-const razorpayInstance = new razorpay({
-    key_id: "",
-    key_secret: ""
-})
+// const razorpayInstance = new razorpay({
+//     key_id: "",
+//     key_secret: ""
+// })
 
 // API for online payment using razor pay
 
 const makePayment = async (req, res) => {
     try {
-        
+        const {appointmentId} = req.body
+        const appointmentData = await appointmentModel.findById(appointmentId)
+
+        if (!appointmentData || appointmentData.cancelled) {
+            return res.json({success: false, message: "Appointment Cancelled or Not Found"})
+        }
+
+        // Stripe payment setup
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Doctor Appointment Payment',
+                        },
+                        unit_amount: appointmentData.amount * 100, // Amount in cents
+                    },
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            metadata: {
+                appointment_id: appointmentId, // Include appointment ID as metadata
+            },
+            // success_url: "https://localhost:4000/checkout-success",
+            // cancel_url: "https://localhost:4000/checkout-cancelled",
+            // success_url: `${YOUR_DOMAIN}?success=true`,
+            // cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+            success_url: `https://localhost:4000/checkout?success=true`,
+            cancel_url: `https://localhost:4000/checkout?canceled=true`,
+        })
+
+        res.json({success: true, session})
+
     } catch (error) {
-        
+        console.error(error);
+        res.json({ success: false, message: "An error occurred." });
     }
 }
 
 
-export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppointments, cancelAppointment}
+export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppointments, cancelAppointment, makePayment}
