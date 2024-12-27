@@ -6,6 +6,8 @@ import {v2 as cloudinary} from "cloudinary"
 import doctorModel from "../models/doctorModel.js"
 import appointmentModel from "../models/appointmentModel.js"
 // import razorpay from "razorpay"
+import Stripe from "stripe"
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 
 // API to Register New User

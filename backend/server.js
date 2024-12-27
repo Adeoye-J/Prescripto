@@ -7,10 +7,6 @@ import adminRouter from "./routes/adminRoute.js"
 import doctorRouter from "./routes/doctorRoute.js"
 import userRouter from "./routes/userRoute.js"
 
-import Stripe from "stripe"
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-
 
 // app config
 const app = express()
