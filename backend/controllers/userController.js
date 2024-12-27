@@ -277,7 +277,8 @@ const makePayment = async (req, res) => {
             // cancel_url: "https://localhost:4000/checkout-cancelled",
             // success_url: `${YOUR_DOMAIN}?success=true`,
             // cancel_url: `${YOUR_DOMAIN}?canceled=true`,
-            success_url: `http://localhost:4000/checkout?success=true`,
+            success_url: `http://localhost:5173/my-appointments`,
+            // success_url: `http://localhost:4000/checkout?success=true`,
             cancel_url: `http://localhost:4000/checkout?canceled=true`,
         })
 
