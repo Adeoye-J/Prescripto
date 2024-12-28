@@ -78,13 +78,13 @@ const MyAppointments = () => {
     };
 
     const handleSuccessPage = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const sessionId = urlParams.get('session_id');
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const sessionId = urlParams.get('session_id');
     
-        if (sessionId) {
-          setSessionId(sessionId); // Set the session ID
+        // if (sessionId) {
+        //   setSessionId(sessionId); // Set the session ID
           setShowSuccess(true); // Show the success popup
-        }
+        // }
     };
 
     const handleCancelledPage = () => {
