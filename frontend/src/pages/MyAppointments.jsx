@@ -144,15 +144,11 @@ const MyAppointments = () => {
         return () => clearTimeout(timeout);
     }, [showSuccess, showCancelled]);
 
-    // useEffect(() => {
-    //     if (token) {
-    //         getUserAppointments()
-    //     }
-    // }, [token])
-
-    // useEffect(() => {
-    //     getUserAppointments();
-    // }, []);
+    useEffect(() => {
+        if (token) {
+            getUserAppointments()
+        }
+    }, [token])
 
     return (
         <div>
