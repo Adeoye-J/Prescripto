@@ -175,13 +175,20 @@ const MyAppointments = () => {
                             </div>
                             <div className=""></div>
                             <div className="flex flex-col gap-2 justify-end">
-                                {!item.cancelled || !item.payment
-                                    && <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
+                                {
+                                    (!item.cancelled && !item.paid) && 
+                                    <>
+                                        <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
+                                        <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
+                                    </>
                                 }
                                 {
-                                !item.cancelled || !item.payment
-                                ? <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
-                                : <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment Cancelled</button>
+                                    item.paid && 
+                                    <button className="sm:min-w-48 py-2 border border-primary rounded text-primary">Paid</button>
+                                }
+                                {
+                                    item.cancelled && 
+                                    <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment Cancelled</button>
                                 }
                                 {showSuccess && (
                                     <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 flex items-center justify-center">
