@@ -9,6 +9,8 @@ const MyAppointments = () => {
     const {doctors, backendUrl, token, getDoctorsData} = useContext(AppContext)
 
     const [appointments, setAppointments] = useState([])
+    const [showSuccess, setShowSuccess] = useState(false); // State to manage success popup visibility
+    const [sessionId, setSessionId] = useState(null); // Store session ID after success
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     const slotDateFormat = (slotDate) => {
@@ -50,22 +52,21 @@ const MyAppointments = () => {
     const stripePromise = loadStripe('pk_test_51QaLFBAHbRfNobUMeYPuFzmVmFqafGotHCACW3qPw5F89jvpxMZzEvR1OHFdH7zXrPNByoRWJVtxskGEd4em2Z0Z00llhVkXru');
 
     const handlePayment = async (appointmentId) => {
-        const stripe = await stripePromise; // Ensure Stripe.js is loaded
+        
         try {
             const { data } = await axios.post(backendUrl + "/api/user/make-payment", { appointmentId }, { headers: { token } } );
-
-            // if (data.success && data.session) {
-            //     // Redirect to Stripe Checkout
-            //     window.location.href = data.session.url;
-            // } else {
-            //     toast.error(data.message || "Unable to initiate payment.");
-            // }
-
             if (data.success) {
                 // window.location.href = data.session.url;
+                console.log(data.session)
+                const stripe = await stripePromise; // Ensure Stripe.js is loaded
                 await stripe.redirectToCheckout({ sessionId: data.session.id });
+                // if (data.session.payment_status === "paid") {
+                //     toast.success("Payment Successful")
+                // } else {
+                //     toast.error("Payment Unsuccessful")
+                // }
             } else {
-                toast.error(data.message);
+                toast.error(data.message || "Unable to initiate payment.");
             }
 
         } catch (error) {
@@ -74,11 +75,31 @@ const MyAppointments = () => {
         }
     };
 
-    useEffect(() => {
-        if (token) {
-            getUserAppointments()
+    const handleSuccessPage = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+    
+        if (sessionId) {
+          setSessionId(sessionId); // Set the session ID
+          setShowSuccess(true); // Show the success popup
         }
-    }, [token])
+    };
+
+
+    useEffect(() => {
+        if (window.location.pathname === '/success') {
+          handleSuccessPage();
+        }
+    }, []);
+    // useEffect(() => {
+    //     if (token) {
+    //         getUserAppointments()
+    //     }
+    // }, [token])
+
+    useEffect(() => {
+        getUserAppointments();
+    }, []);
 
     return (
         <div>
@@ -109,6 +130,15 @@ const MyAppointments = () => {
                                 ? <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
                                 : <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment Cancelled</button>
                                 }
+                                {showSuccess && (
+                                    <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 flex items-center justify-center">
+                                        <div className="bg-white p-6 rounded-lg text-center shadow-md">
+                                            <h2>Payment Successful!</h2>
+                                            <p>Your transaction ID is: {sessionId}</p>
+                                            <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300' onClick={closeSuccessPopup}>Close</button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))
