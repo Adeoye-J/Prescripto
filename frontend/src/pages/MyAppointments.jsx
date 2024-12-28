@@ -160,7 +160,7 @@ const MyAppointments = () => {
                                         <div className="bg-white p-6 rounded-lg text-center shadow-md">
                                             <h2 className='text-blue-400 font-bold'>Payment Successful!</h2>
                                             <p>Your transaction ID is: {sessionId}</p>
-                                            <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300' onClick={closeSuccessPopup}>Close</button>
+                                            <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Close</button>
                                         </div>
                                     </div>
                                 )}
@@ -169,7 +169,7 @@ const MyAppointments = () => {
                                         <div className="bg-white p-6 rounded-lg text-center shadow-md">
                                             <h2 className='text-red-400 font-bold'>Payment Cancelled!</h2>
                                             <p>Your transaction ID is: {sessionId}</p>
-                                            <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300' onClick={closeSuccessPopup}>Close</button>
+                                            <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Close</button>
                                         </div>
                                     </div>
                                 )}
