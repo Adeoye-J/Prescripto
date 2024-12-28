@@ -45,7 +45,7 @@ app.get('/payment/success', async (req, res) => {
 
 app.get('/payment/cancelled', (req, res) => {
     // Redirect the user to a frontend cancellation page
-    res.redirect(`${process.env.FRONTEND_URL}/cancelled`);
+    res.redirect(`${process.env.FRONTEND_URL}/my-appointments/cancelled`);
 });
 
 // localhost:4000/api/admin/add-doctor
