@@ -89,6 +89,8 @@ const MyAppointments = () => {
     useEffect(() => {
         if (window.location.pathname === '/success') {
           handleSuccessPage();
+        } else {
+            handleCancelledPage()
         }
     }, []);
     // useEffect(() => {
