@@ -3,11 +3,12 @@ import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { loadStripe } from '@stripe/stripe-js';
+import { useNavigate } from 'react-router-dom';
 
 const MyAppointments = () => {
 
     const {doctors, backendUrl, token, getDoctorsData} = useContext(AppContext)
-
+    const navigate = useNavigate()
     const [appointments, setAppointments] = useState([])
     const [showSuccess, setShowSuccess] = useState(false); // State to manage success popup visibility
     const [showCancelled, setShowCancelled] = useState(false); // State to manage success popup visibility
@@ -98,12 +99,22 @@ const MyAppointments = () => {
 
 
     useEffect(() => {
-        if (window.location.pathname === '/success') {
+        if (window.location.pathname === '/my-appointments/success') {
           handleSuccessPage();
-        } else if (window.location.pathname === '/cancelled') {
+        } else if (window.location.pathname === '/my-appointments/cancelled') {
             handleCancelledPage();
         }
+
+        getUserAppointments();
     }, []);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            navigate('/my-appointments'); // Redirect to the appointments page after 3 seconds
+        }, 3000);
+    
+        return () => clearTimeout(timeout);
+    }, [showSuccess, showCancelled]);
 
     // useEffect(() => {
     //     if (token) {
@@ -111,9 +122,9 @@ const MyAppointments = () => {
     //     }
     // }, [token])
 
-    useEffect(() => {
-        getUserAppointments();
-    }, []);
+    // useEffect(() => {
+    //     getUserAppointments();
+    // }, []);
 
     return (
         <div>
