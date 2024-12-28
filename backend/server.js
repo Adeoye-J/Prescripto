@@ -24,22 +24,28 @@ app.use("/api/doctor", doctorRouter)
 app.use("/api/user", userRouter)
 
 
-// app.post("/make-payment", async (req, res) => {
-//     const session = await stripe.checkout.sessions.create({
-//         payment_method_types: ["card"],
-//         line_items: [
-//             {
-//                 // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-//                 price: '{{PRICE_ID}}',
-//                 quantity: 1,
-//             },
-//         ],
-//         mode: 'payment',
-//         success_url: `${YOUR_DOMAIN}/success.html`,
-//         cancel_url: `${YOUR_DOMAIN}/cancel.html`,
-//     })
-
-// })
+app.get('/payment/success', async (req, res) => {
+    const sessionId = req.query.session_id;
+  
+    try {
+      // Fetch the session details from Stripe
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
+  
+      // Perform any post-payment actions, such as updating your database
+      console.log('Payment successful!', session);
+  
+      // Redirect the user to a frontend success page
+      res.redirect(`${process.env.FRONTEND_URL}/success?session_id=${sessionId}`);
+    } catch (error) {
+      console.error('Error fetching session:', error);
+      res.status(500).send('An error occurred');
+    }
+});
+  
+app.get('/payment/cancelled', (req, res) => {
+    // Redirect the user to a frontend cancellation page
+    res.redirect(`${process.env.FRONTEND_URL}/cancelled`);
+});
 
 // localhost:4000/api/admin/add-doctor
 
