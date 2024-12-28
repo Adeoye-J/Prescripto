@@ -60,8 +60,8 @@ const MyAppointments = () => {
             if (data.success) {
                 console.log(data.session)
                 const stripe = await stripePromise; // Ensure Stripe.js is loaded
-                window.location.href = data.session.url;
-                // await stripe.redirectToCheckout({ sessionId: data.session.id });
+                // window.location.href = data.session.url;
+                await stripe.redirectToCheckout({ sessionId: data.session.id });
             } else {
                 toast.error(data.message || "Unable to initiate payment.");
             }
