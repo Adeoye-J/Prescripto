@@ -72,13 +72,13 @@ const MyAppointments = () => {
     };
 
     const handleSuccessPage = () => {
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const sessionId = urlParams.get('session_id');
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
     
-        // if (sessionId) {
-        //   setSessionId(sessionId); // Set the session ID
-        setShowSuccess(true); // Show the success popup
-        // }
+        if (sessionId) {
+            setSessionId(sessionId); // Set the session ID
+            setShowSuccess(true); // Show the success popup
+        }
     };
 
     const handleCancelledPage = () => {
@@ -160,9 +160,9 @@ const MyAppointments = () => {
                                 )}
                                 {showCancelled && (
                                     <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/10 flex items-center justify-center">
-                                        <div className="bg-white p-6 rounded-lg text-center shadow-md">
-                                            <h2 className='text-red-400 font-bold'>Payment Cancelled!</h2>
-                                            <p>Your transaction ID is: {sessionId}</p>
+                                        <div className="bg-white p-10 rounded-lg text-center shadow-md">
+                                            <h2 className='text-red-400 font-bold pb-6'>Payment Cancelled!</h2>
+                                            <p className='pb-6'>Your transaction ID is: {sessionId}</p>
                                             <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Close</button>
                                         </div>
                                     </div>

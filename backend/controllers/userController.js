@@ -279,7 +279,7 @@ const makePayment = async (req, res) => {
             // cancel_url: `http://localhost:4000/checkout?canceled=true`,
         })
 
-        console.log("Got here")
+        console.log("Got here 1")
 
         res.json({success: true, session})
 
