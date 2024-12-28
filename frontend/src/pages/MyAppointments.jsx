@@ -136,13 +136,13 @@ const MyAppointments = () => {
         getUserAppointments();
     }, []);
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            navigate('/my-appointments'); // Redirect to the appointments page after 3 seconds
-        }, 3000);
+    // useEffect(() => {
+    //     const timeout = setTimeout(() => {
+    //         navigate('/my-appointments'); // Redirect to the appointments page after 3 seconds
+    //     }, 3000);
     
-        return () => clearTimeout(timeout);
-    }, [showSuccess, showCancelled]);
+    //     return () => clearTimeout(timeout);
+    // }, [showSuccess, showCancelled]);
 
     useEffect(() => {
         if (token) {
@@ -186,7 +186,7 @@ const MyAppointments = () => {
                                     item.cancelled && 
                                     <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment Cancelled</button>
                                 }
-                                {showSuccess && (
+                                {/* {showSuccess && (
                                     <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 flex items-center justify-center">
                                         <div className="bg-white p-6 rounded-lg text-center shadow-md">
                                             <h2 className='text-blue-400 font-bold'>Payment Successful!</h2>
@@ -203,7 +203,7 @@ const MyAppointments = () => {
                                             <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Close</button>
                                         </div>
                                     </div>
-                                )}
+                                )} */}
                             </div>
                         </div>
                     ))
