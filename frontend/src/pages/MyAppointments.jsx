@@ -9,6 +9,7 @@ const MyAppointments = () => {
 
     const {doctors, backendUrl, token, getDoctorsData} = useContext(AppContext)
     const navigate = useNavigate()
+    // const [sessionId, setSessionId] = useState()
     const [appointments, setAppointments] = useState([])
     const [showSuccess, setShowSuccess] = useState(false); // State to manage success popup visibility
     const [showCancelled, setShowCancelled] = useState(false); // State to manage success popup visibility
@@ -70,37 +71,42 @@ const MyAppointments = () => {
         }
     };
 
-    const verifyPayment = () => {
-        
+    const verifyPayment = async () => {
+        try {
+            
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message);
+        }
     }
 
-    const handleSuccessPage = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const sessionId = urlParams.get('session_id');
+    // const handleSuccessPage = () => {
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const sessionId = urlParams.get('session_id');
     
-        if (sessionId) {
-            setSessionId(sessionId); // Set the session ID
-            setShowSuccess(true); // Show the success popup
-        }
-    };
+    //     if (sessionId) {
+    //         setSessionId(sessionId); // Set the session ID
+    //         setShowSuccess(true); // Show the success popup
+    //     }
+    // };
 
-    const handleCancelledPage = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const sessionId = urlParams.get('session_id');
+    // const handleCancelledPage = () => {
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const sessionId = urlParams.get('session_id');
     
-        if (sessionId) {
-          setSessionId(sessionId); // Set the session ID
-          setShowCancelled(true); // Show the success popup
-        }
-    };
+    //     if (sessionId) {
+    //       setSessionId(sessionId); // Set the session ID
+    //       setShowCancelled(true); // Show the success popup
+    //     }
+    // };
 
 
     useEffect(() => {
-        if (window.location.pathname === '/my-appointments/success') {
-          handleSuccessPage();
-        } else if (window.location.pathname === '/my-appointments/cancelled') {
-            handleCancelledPage();
-        }
+        // if (window.location.pathname === '/my-appointments/success') {
+        //   handleSuccessPage();
+        // } else if (window.location.pathname === '/my-appointments/cancelled') {
+        //     handleCancelledPage();
+        // }
 
         getUserAppointments();
     }, []);
