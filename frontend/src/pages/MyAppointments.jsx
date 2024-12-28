@@ -10,6 +10,7 @@ const MyAppointments = () => {
 
     const [appointments, setAppointments] = useState([])
     const [showSuccess, setShowSuccess] = useState(false); // State to manage success popup visibility
+    const [showCancelled, setShowCancelled] = useState(false); // State to manage success popup visibility
     const [sessionId, setSessionId] = useState(null); // Store session ID after success
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -85,14 +86,25 @@ const MyAppointments = () => {
         }
     };
 
+    const handleCancelledPage = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+    
+        if (sessionId) {
+          setSessionId(sessionId); // Set the session ID
+          setShowCancelled(true); // Show the success popup
+        }
+    };
+
 
     useEffect(() => {
         if (window.location.pathname === '/success') {
           handleSuccessPage();
-        } else {
-            handleCancelledPage()
+        } else if (window.location.pathname === '/cancelled') {
+            handleCancelledPage();
         }
     }, []);
+
     // useEffect(() => {
     //     if (token) {
     //         getUserAppointments()
@@ -135,7 +147,16 @@ const MyAppointments = () => {
                                 {showSuccess && (
                                     <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 flex items-center justify-center">
                                         <div className="bg-white p-6 rounded-lg text-center shadow-md">
-                                            <h2>Payment Successful!</h2>
+                                            <h2 className='text-blue-400 font-bold'>Payment Successful!</h2>
+                                            <p>Your transaction ID is: {sessionId}</p>
+                                            <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300' onClick={closeSuccessPopup}>Close</button>
+                                        </div>
+                                    </div>
+                                )}
+                                {showCancelled && (
+                                    <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 flex items-center justify-center">
+                                        <div className="bg-white p-6 rounded-lg text-center shadow-md">
+                                            <h2 className='text-red-400 font-bold'>Payment Cancelled!</h2>
                                             <p>Your transaction ID is: {sessionId}</p>
                                             <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300' onClick={closeSuccessPopup}>Close</button>
                                         </div>

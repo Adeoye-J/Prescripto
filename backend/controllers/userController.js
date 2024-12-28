@@ -273,11 +273,6 @@ const makePayment = async (req, res) => {
             metadata: {
                 appointment_id: appointmentId, // Include appointment ID as metadata
             },
-            // success_url: "https://localhost:4000/checkout-success",
-            // cancel_url: "https://localhost:4000/checkout-cancelled",
-            // success_url: `${YOUR_DOMAIN}?success=true`,
-            // cancel_url: `${YOUR_DOMAIN}?canceled=true`,
-            // success_url: `http://localhost:5173/my-appointments/`,
             success_url: `http://localhost:5173/my-appointments/success?session_id=${session.id}`,
             cancel_url: `http://localhost:5173/my-appointments/cancelled?session_id=${session.id}`,
             // success_url: `http://localhost:4000/checkout?success=true`,
