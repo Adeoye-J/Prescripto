@@ -86,6 +86,17 @@ const MyAppointments = () => {
         }
     }
 
+    const handleSuccessPage = () => {
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const sessionId = urlParams.get('session_id');
+    
+        if (sessionId) {
+          console.log('Session ID from success URL:', sessionId);
+          // Optionally verify payment with the backend
+          verifyPayment();
+        }
+    };
+
     // const handleSuccessPage = () => {
     //     const urlParams = new URLSearchParams(window.location.search);
     //     const sessionId = urlParams.get('session_id');
