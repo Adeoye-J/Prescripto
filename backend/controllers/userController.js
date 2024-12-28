@@ -289,24 +289,23 @@ const makePayment = async (req, res) => {
     }
 }
 
-// const verifyPayment = async (req, res) => {
-//     try {
-//         const { sessionId } = req.body;
-//         const session = await stripe.checkout.sessions.retrieve(sessionId);
+const verifyPayment = async (req, res) => {
+    try {
+        const { sessionId } = req.body;
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-//         if (session.payment_status === 'paid') {
-//             const appointmentId = session.metadata.appointment_id;
-//             await appointmentModel.findByIdAndUpdate(appointmentId, { paid: true });
-//             res.json({ success: true, message: 'Payment verified and updated.' });
-//         } else {
-//             res.json({ success: false, message: 'Payment not completed.' });
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         res.json({ success: false, message: error.message });
-//     }
-// };
+        if (session.payment_status === 'paid') {
+            const appointmentId = session.metadata.appointment_id;
+            await appointmentModel.findByIdAndUpdate(appointmentId, { paid: true });
+            res.json({ success: true, message: 'Payment verified and updated.' });
+        } else {
+            res.json({ success: false, message: 'Payment not completed.' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
+    }
+};
 
 
-
-export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppointments, cancelAppointment, makePayment}
+export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppointments, cancelAppointment, makePayment, verifyPayment}

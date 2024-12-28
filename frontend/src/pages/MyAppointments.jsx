@@ -70,6 +70,10 @@ const MyAppointments = () => {
         }
     };
 
+    const verifyPayment = () => {
+        
+    }
+
     const handleSuccessPage = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const sessionId = urlParams.get('session_id');

@@ -1,5 +1,5 @@
 import express from "express"
-import { bookAppointment, cancelAppointment, getProfile, makePayment, registerUser, updateProfile, userAppointments, userLogin } from "../controllers/userController.js"
+import { bookAppointment, cancelAppointment, getProfile, makePayment, registerUser, updateProfile, userAppointments, userLogin, verifyPayment } from "../controllers/userController.js"
 import authUser from "../middlewares/authUser.js"
 import upload from "../middlewares/multer.js"
 
@@ -14,6 +14,7 @@ userRouter.post("/book-appointment", authUser, bookAppointment)
 userRouter.get("/user-appointments", authUser, userAppointments)
 userRouter.post("/cancel-appointment", authUser, cancelAppointment)
 userRouter.post("/make-payment", authUser, makePayment)
+userRouter.post("/verify-payment", authUser, verifyPayment)
 // userRouter.post("/checkout-success", (req, res) => {
 //     return res.json({success: true, message: "Payment Successful"})
 // })
