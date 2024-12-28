@@ -6,7 +6,8 @@ import connectCloudinary from "./config/cloudinary.js"
 import adminRouter from "./routes/adminRoute.js"
 import doctorRouter from "./routes/doctorRoute.js"
 import userRouter from "./routes/userRoute.js"
-
+import Stripe from "stripe"
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 // app config
 const app = express()
@@ -35,13 +36,13 @@ app.get('/payment/success', async (req, res) => {
       console.log('Payment successful!', session);
   
       // Redirect the user to a frontend success page
-      res.redirect(`${process.env.FRONTEND_URL}/success?session_id=${sessionId}`);
+      res.redirect(`${process.env.FRONTEND_URL}/my-appointments/success?session_id=${sessionId}`);
     } catch (error) {
       console.error('Error fetching session:', error);
       res.status(500).send('An error occurred');
     }
 });
-  
+
 app.get('/payment/cancelled', (req, res) => {
     // Redirect the user to a frontend cancellation page
     res.redirect(`${process.env.FRONTEND_URL}/cancelled`);
