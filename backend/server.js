@@ -33,7 +33,7 @@ app.get('/payment/success', async (req, res) => {
       const session = await stripe.checkout.sessions.retrieve(sessionId);
   
       // Perform any post-payment actions, such as updating your database
-      console.log('Payment successful!', session);
+    //   console.log('Payment successful!', session);
   
       // Redirect the user to a frontend success page
       res.redirect(`${process.env.FRONTEND_URL}/my-appointments/success?session_id=${sessionId}`);
