@@ -118,13 +118,21 @@ const MyAppointments = () => {
     // };
 
 
-    useEffect(() => {
-        // if (window.location.pathname === '/my-appointments/success') {
-        //   handleSuccessPage();
-        // } else if (window.location.pathname === '/my-appointments/cancelled') {
-        //     handleCancelledPage();
-        // }
+    // useEffect(() => {
+    //     if (window.location.pathname === '/my-appointments/success') {
+    //       handleSuccessPage();
+    //     } else if (window.location.pathname === '/my-appointments/cancelled') {
+    //         handleCancelledPage();
+    //     }
 
+    //     getUserAppointments();
+    // }, []);
+
+      // Run this on the success page to extract session_id from the URL
+    useEffect(() => {
+        if (window.location.pathname === '/success') {
+            handleSuccessPage();
+        }
         getUserAppointments();
     }, []);
 
