@@ -54,13 +54,12 @@ const MyAppointments = () => {
     const stripePromise = loadStripe('pk_test_51QaLFBAHbRfNobUMeYPuFzmVmFqafGotHCACW3qPw5F89jvpxMZzEvR1OHFdH7zXrPNByoRWJVtxskGEd4em2Z0Z00llhVkXru');
 
     const handlePayment = async (appointmentId) => {
-        
+        const stripe = await stripePromise; // Ensure Stripe.js is loaded
         try {
             const { data } = await axios.post(backendUrl + "/api/user/make-payment", { appointmentId }, { headers: { token } } );
             if (data.success) {
                 console.log(data.session)
                 // window.location.href = data.session.url;
-                const stripe = await stripePromise; // Ensure Stripe.js is loaded
                 await stripe.redirectToCheckout({ sessionId: data.session.id });
             } else {
                 toast.error(data.message || "Unable to initiate payment.");
