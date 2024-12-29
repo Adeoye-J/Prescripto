@@ -3,10 +3,12 @@ import { useContext } from 'react'
 import { AdminContext } from '../../context/AdminContext'
 import { useEffect } from 'react'
 import { assets } from '../../assets/assets'
+import { AppContext } from '../../context/AppContext'
 
 const Dashboard = () => {
 
     const {getDashboardData, dashboardData, aToken, cancelAppointment} = useContext(AdminContext)
+    const {slotDateFormat} = useContext(AppContext)
 
     useEffect(() => {
         if (aToken) {
@@ -48,11 +50,11 @@ const Dashboard = () => {
                 <div className="pt-4 border border-t-0">
                     {
                         dashboardData.latestAppointments.map((item, index) => (
-                            <div key={index} className="">
-                                <img src={item.docData.image} alt="Doctor's Image" />
-                                <div className="">
-                                    <p>{item.docData.name}</p>
-                                    <p>{item.slotDate}</p>
+                            <div key={index} className="flex items-center px-6 py-3 gap-3 hover:bg-gray-100">
+                                <img className='w-10 rounded-full' src={item.docData.image} alt="Doctor's Image" />
+                                <div className="flex-1 text-sm">
+                                    <p className='text-gray-800 font-medium'>{item.docData.name}</p>
+                                    <p className='text-gray-600'>{slotDateFormat(item.slotDate)}</p>
                                 </div>
                                 {
                                     item.cancelled
