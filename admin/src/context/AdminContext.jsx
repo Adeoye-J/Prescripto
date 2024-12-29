@@ -43,6 +43,8 @@ const AdminContextProvider = (props) => {
         }
     }
 
+    const getAllAppointments = async () => 
+
     const value = {aToken, setAToken, backendUrl, doctors, getAllDoctors, changeAvailability}
 
     return (

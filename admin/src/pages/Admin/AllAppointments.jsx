@@ -1,8 +1,13 @@
 import React from 'react'
 
 const AllAppointments = () => {
+
+
+    
     return (
-        <div>AllAppointments</div>
+        <div>
+            
+        </div>
     )
 }
 
