@@ -77,6 +77,7 @@ const MyAppointments = () => {
             const {data} = await axios.post(backendUrl + "/api/user/verify-payment", {sessionId}, {headers: {token}})
             if (data.success) {
                 toast.success(data.message)
+                getUserAppointments();
             } else {
                 toast.error(data.message)
             }
@@ -133,7 +134,6 @@ const MyAppointments = () => {
         if (window.location.pathname === '/success') {
             handleSuccessPage();
         }
-        getUserAppointments();
     }, []);
 
     // useEffect(() => {
