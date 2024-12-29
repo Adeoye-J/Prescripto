@@ -4,11 +4,15 @@ export const AppContext = createContext()
 
 const AppContextProvider = (props) => {
 
-    const calculateAge = () => {
-        
+    const calculateAge = (dob) => {
+        const today = new Date()
+        const birthDate = new Date(dob)
+
+        let age = today.getFullYear() - birthDate.getFullYear()
+        return age
     }
 
-    const value = {}
+    const value = {calculateAge}
 
     return (
         <AppContext.Provider value={value}>

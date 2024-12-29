@@ -2,10 +2,12 @@ import React from 'react'
 import { useContext } from 'react'
 import { AdminContext } from '../../context/AdminContext'
 import { useEffect } from 'react'
+import { AppContext } from '../../context/AppContext'
 
 const AllAppointments = () => {
 
     const {aToken, appointments, getAllAppointments} = useContext(AdminContext)
+    const {calculateAge} = useContext(AppContext)
 
     useEffect(() => {
         if (aToken) {
@@ -35,6 +37,7 @@ const AllAppointments = () => {
                                 <img className='w-8 rounded-full' src={item.userData.image} alt="User Image" />
                                 <p>{item.userData.name}</p>
                             </div>
+                            <p>{calculateAge(item.userData.dob)}</p>
                         </div>
                     ))
                 }
