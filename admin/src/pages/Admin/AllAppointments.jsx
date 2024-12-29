@@ -14,17 +14,17 @@ const AllAppointments = () => {
     }, [aToken])
 
     return (
-        <div>
-            <p>All Appointments</p>
-            <div className="">
-                <div className="">
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
+        <div className='w-full max-w-6xl m-5'>
+            <p className='mb-3 text-lg font-medium'>All Appointments</p>
+            <div className="bg-white border rounded text-sm max-h-[80vh] min-h-[60vh] overflow-y-scroll">
+                <div className="hidden">
+                    <p>#</p>
+                    <p>Patient</p>
+                    <p>Age</p>
+                    <p>Date & Time</p>
+                    <p>Doctor</p>
+                    <p>Fees</p>
+                    <p>Actions</p>
                 </div>
             </div>
         </div>
