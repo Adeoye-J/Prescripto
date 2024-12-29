@@ -299,7 +299,7 @@ const verifyPayment = async (req, res) => {
         if (session.payment_status === 'paid') {
             const appointmentId = session.metadata.appointment_id;
             await appointmentModel.findByIdAndUpdate(appointmentId, { paid: true });
-            res.json({ success: true, message: 'Payment verified and updated.' });
+            res.json({ success: true, message: 'Payment successful, verified and updated.' });
         } else {
             res.json({ success: false, message: 'Payment not completed.' });
         }
