@@ -45,7 +45,24 @@ const Dashboard = () => {
                     <img src={assets.list_icon} alt="List Icon" />
                     <p className='font-semibold'>Latest Bookings</p>
                 </div>
-                .
+                <div className="pt-4 border border-t-0">
+                    {
+                        dashboardData.latestAppointments.map((item, index) => (
+                            <div key={index} className="">
+                                <img src={item.docData.image} alt="Doctor's Image" />
+                                <div className="">
+                                    <p>{item.docData.name}</p>
+                                    <p>{item.slotDate}</p>
+                                </div>
+                                {
+                                    item.cancelled
+                                    ? <p className='text-red-400 text-xs font-medium'>Cancelled</p>
+                                    : <img onClick={() => cancelAppointment(item._id)} className='w-10 cursor-pointer' src={assets.cancel_icon} alt="cancel icon" />
+                                }
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )
