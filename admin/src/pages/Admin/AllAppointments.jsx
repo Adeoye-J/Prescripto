@@ -29,11 +29,11 @@ const AllAppointments = () => {
 
                 {
                     appointments.map((item, index) => (
-                        <div key={index} className="">
-                            <p>{index + 1}</p>
-                            <div className="">
-                                <img src={item.userData.image} alt="User Image" />
-                                <p>{item.user}</p>
+                        <div key={index} className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50">
+                            <p className='max-sm:hidden'>{index + 1}</p>
+                            <div className="flex items-center gap-2">
+                                <img className='w-8 rounded-full' src={item.userData.image} alt="User Image" />
+                                <p>{item.userData.name}</p>
                             </div>
                         </div>
                     ))
