@@ -119,7 +119,9 @@ const updateProfile = async (req, res) => {
             userDetails = {name, gender, dob, phone, address: JSON.parse(address), image: imageUrl}
         }
 
-        await appointmentModel.findByIdAndUpdate({userId}, { $set: { userData: userDetails } })
+        // await appointmentModel.UpdateMany({userId}, { $set: { userData: userDetails } })
+        await appointmentModel.updateMany({userId}, {$set: {userData: userDetails}})
+
         // if (appointments) {
         //     await appointmentModel.findOneAndUpdate()
         // }
