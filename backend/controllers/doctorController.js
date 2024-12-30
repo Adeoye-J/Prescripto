@@ -30,4 +30,15 @@ const doctorList = async (req, res) => {
     }
 }
 
+// API for Doctor's Login
+
+const doctorLogin = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
+
 export {changeAvailability, doctorList}
