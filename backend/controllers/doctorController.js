@@ -37,5 +37,5 @@ const doctorLogin = async (req, res) => {
         res.json({success: false, message: error.message})
     }
 }
-''
+'d'
 export {changeAvailability, doctorList, doctorLogin}
