@@ -119,12 +119,7 @@ const updateProfile = async (req, res) => {
             userDetails = {name, gender, dob, phone, address: JSON.parse(address), image: imageUrl}
         }
 
-        // await appointmentModel.UpdateMany({userId}, { $set: { userData: userDetails } })
         await appointmentModel.updateMany({userId}, {$set: {userData: userDetails}})
-
-        // if (appointments) {
-        //     await appointmentModel.findOneAndUpdate()
-        // }
 
         res.json({success: true, message: "Profile Successfully Updated"})
 
@@ -249,13 +244,6 @@ const cancelAppointment = async (req, res) => {
     }
 }
 
-// const razorpayInstance = new razorpay({
-//     key_id: "",
-//     key_secret: ""
-// })
-
-// API for online payment using razor pay
-
 const makePayment = async (req, res) => {
     try {
         const {appointmentId} = req.body
@@ -319,6 +307,5 @@ const verifyPayment = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 };
-
 
 export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppointments, cancelAppointment, makePayment, verifyPayment}
