@@ -34,6 +34,7 @@ const doctorList = async (req, res) => {
 
 const doctorLogin = async (req, res) => {
     try {
+        const {email, password} = req.body
         
     } catch (error) {
         console.log(error)
