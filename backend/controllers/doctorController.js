@@ -1,9 +1,6 @@
-
-
-// Change Doctor Availability
-
 import doctorModel from "../models/doctorModel.js"
 
+// Change Doctor Availability
 const changeAvailability = async (req, res) => {
     try {
         
@@ -31,7 +28,6 @@ const doctorList = async (req, res) => {
 }
 
 // API for Doctor's Login
-
 const doctorLogin = async (req, res) => {
     try {
         const {email, password} = req.body
@@ -42,4 +38,4 @@ const doctorLogin = async (req, res) => {
     }
 }
 
-export {changeAvailability, doctorList}
+export {changeAvailability, doctorList, doctorLogin}
