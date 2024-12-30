@@ -117,10 +117,10 @@ const updateProfile = async (req, res) => {
             await userModel.findByIdAndUpdate(userId, {image: imageUrl})
         }
 
-        const appointments = await appointmentModel.find({userId})
-        if (appointments) {
-            await appointmentModel.findOneAndUpdate()
-        }
+        const appointments = await appointmentModel.findOneAndUpdate({userId}, { $set: { userData: userDetails } }, { new: true })
+        // if (appointments) {
+        //     await appointmentModel.findOneAndUpdate()
+        // }
 
         res.json({success: true, message: "Profile Successfully Updated"})
 
