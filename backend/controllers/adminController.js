@@ -145,7 +145,7 @@ const adminDashboard = async (req, res) => {
             patients: users.length,
             latestAppointments: appointments.reverse().slice(0, 5)
         }
-        
+
         res.json({success: true, dashboardData})
     } catch (error) {
         console.error(error);
