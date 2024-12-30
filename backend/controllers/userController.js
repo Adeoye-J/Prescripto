@@ -105,7 +105,7 @@ const updateProfile = async (req, res) => {
             return res.json({success: false, message: "Missing and Incomplete details"})
         }
 
-        const userDetails = {name, gender, dob, phone, address: JSON.parse(address)}
+        let userDetails = {name, gender, dob, phone, address: JSON.parse(address)}
 
         await userModel.findByIdAndUpdate(userId, userDetails)
         
@@ -115,9 +115,11 @@ const updateProfile = async (req, res) => {
             const imageUrl = imageUpload.secure_url
 
             await userModel.findByIdAndUpdate(userId, {image: imageUrl})
+            
+            userDetails = {name, gender, dob, phone, address: JSON.parse(address), image: imageUrl}
         }
 
-        await appointmentModel.updateOne({userId}, { $set: { userData: userDetails } })
+        await appointmentModel.findByIdAndUpdate({userId}, { $set: { userData: userDetails } })
         // if (appointments) {
         //     await appointmentModel.findOneAndUpdate()
         // }
