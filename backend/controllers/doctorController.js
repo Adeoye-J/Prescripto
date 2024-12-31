@@ -113,6 +113,8 @@ const doctorDashboard = async (req,res) => {
                 earnings += item.amount
             }
         })
+
+        let patients = []
     } catch (error) {
         console.log(error)
         res.json({success: false, message: error.message})
