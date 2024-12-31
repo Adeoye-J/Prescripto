@@ -147,7 +147,7 @@ const bookAppointment = async (req, res) => {
         if (!docData.available) {
             return res.json({
                 success: false,
-                message: "Doctor unavailable for appointment at the moment, try again later."
+                message: "Doctor unavailable"
             });
         }
 
