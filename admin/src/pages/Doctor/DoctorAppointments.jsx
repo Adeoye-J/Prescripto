@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react'
 const DoctorAppointments = () => {
 
     const {dToken, docAppointments, getDocAppointments} = useContext(DoctorContext)
+    const {calculateAge, slotDateFormat, currency} = useContext(AppContext)
 
     useEffect(() => {
         if (dToken) {
@@ -15,7 +16,7 @@ const DoctorAppointments = () => {
         <div className='w-full max-w-6xl m-5'>
             <p className='mb-3 text-lg font-medium'>All Appointments</p>
             <div className="bg-white border rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">
-                <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] grid-flow-col py-3 px-6 border-b">
+                <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 py-3 px-6 border-b">
                     <p>#</p>
                     <p>Patient</p>
                     <p>Payment</p>
@@ -32,6 +33,9 @@ const DoctorAppointments = () => {
                             <div className="flex items-center gap-2">
                                 <img className='w-8 rounded-full' src={item.userData.image} alt="User Image" />
                                 <p>{item.userData.name}</p>
+                            </div>
+                            <div className="">
+                                <p>{item.payment ? "Online" : "Cash"}</p>
                             </div>
                             <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
                             <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
