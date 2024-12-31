@@ -24,24 +24,24 @@ const DoctorProfile = () => {
 
                     <p className='text-3xl font-medium text-gray-700'>{profileData.name}</p>
 
-                    <div className="flex items-center gap-2 mt-1 tex">
+                    <div className="flex items-center gap-2 mt-1 text-gray-600">
                         <p>{profileData.degree} - {profileData.speciality}</p>
-                        <button>{profileData.experience}</button>
+                        <button className='py-0.5 px-2 border text-xs rounded-full'>{profileData.experience}</button>
                     </div>
 
                     <div className="">
-                        <p>About:</p>
-                        <p>{profileData.about}</p>
+                        <p className='text-sm font-medium text-neutral-800 mt-3'>About:</p>
+                        <p className='text-sm text-gray-600 max-w-[700px] mt-1'>{profileData.about}</p>
                     </div>
 
-                    <p>Appointment fee: <span>{currency} {profileData.fees}</span></p>
+                    <p className='text-gray-600 font-medium mt-4'>Appointment fee: <span className='text-gray-800'>{currency} {profileData.fees}</span></p>
 
-                    <div className="">
+                    <div className="flex gap-2 py-2">
                         <p>Address:</p>
-                        <p>{profileData.address.line1} <br /> {profileData.address.line2}</p>
+                        <p className='text-sm'>{profileData.address.line1} <br /> {profileData.address.line2}</p>
                     </div>
 
-                    <div className="">
+                    <div className="fle">
                         <input type="checkbox" />
                         <label htmlFor="">Available</label>
                     </div>
