@@ -15,7 +15,26 @@ const DoctorProfile = () => {
 
     return profileData && (
         <div>
-            
+            <div className="">
+                <div className="">
+                    <img src={profileData.image} alt="Doctor's Image" />
+                </div>
+
+                <div className="">
+
+                    <p>{profileData.name}</p>
+
+                    <div className="">
+                        <p>{profileData.degree} - {profileData.speciality}</p>
+                        <button>{profileData.experience}</button>
+                    </div>
+
+                    <div className="">
+                        <p></p>
+                    </div>
+
+                </div>
+            </div>
         </div>
     )
 }
