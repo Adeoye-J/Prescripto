@@ -13,6 +13,7 @@ import DoctorsList from './pages/Admin/DoctorsList';
 const App = () => {
 
     const {aToken} = useContext(AdminContext)
+    const {dToken} = useContext(AdminContext)
 
     return aToken ? (
         <div>
