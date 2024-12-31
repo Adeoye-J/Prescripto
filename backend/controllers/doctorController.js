@@ -158,12 +158,41 @@ const updateDoctorProfile = async (req, res) => {
     try {
         const {docId, fees, address, available} = req.body
         
-        await doctorModel.findByIdAndUpdate(docId, {fees, address, available})
-        const profileData = await doctorModel.findById(docId).select("-password")
+        // await doctorModel.findByIdAndUpdate(docId, {fees, address, available})
+        // const profileData = await doctorModel.findById(docId).select("-password")
 
-        console.log(profileData)
+        // console.log(profileData)
 
-        res.json({success: true, message: "Profile Successfully Updated"})
+        // res.json({success: true, message: "Profile Successfully Updated"})
+
+        // Validate request body
+        if (!docId || fees === undefined || !address || available === undefined) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields (docId, fees, address, available) are required.",
+            });
+        }
+
+        // Update doctor profile
+        const updatedDoc = await doctorModel.findByIdAndUpdate(
+            docId,
+            { fees, address, available },
+            // { new: true, runValidators: true } // Return the updated document and run validators
+        ).select("-password");
+
+        if (!updatedDoc) {
+            return res.status(404).json({
+                success: false,
+                message: "Doctor not found.",
+            });
+        }
+
+        // Success response
+        res.status(200).json({
+            success: true,
+            message: "Profile successfully updated",
+            data: updatedDoc, // Optionally include updated data
+        });
     } catch (error) {
         console.log(error)
         res.json({success: false, message: error.message})
