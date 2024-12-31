@@ -36,18 +36,15 @@ const DoctorAppointments = () => {
                                 <img className='w-8 rounded-full' src={item.userData.image} alt="User Image" />
                                 <p>{item.userData.name}</p>
                             </div>
-                            <div className="text">
+                            <div className="text-xs inline border border-primary px-2 rounded-full">
                                 <p>{item.payment ? "Online" : "Cash"}</p>
                             </div>
                             <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
                             <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
                             <p>{currency}{item.amount}</p>
                             <div className="">
-                                {
-                                    item.cancelled
-                                    ? <p className='text-red-400 text-xs font-medium'>Cancelled</p>
-                                    : <img onClick={() => cancelAppointment(item._id)} className='w-10 cursor-pointer' src={assets.cancel_icon} alt="cancel icon" />
-                                }
+                                <img onClick={() => cancelAppointment(item._id)} className='w-10 cursor-pointer' src={assets.cancel_icon} alt="cancel icon" />
+                                <img className='w-10 cursor-pointer' src={assets.tick_icon} alt="Tick Icon" />
                             </div>
                         </div>
                     ))

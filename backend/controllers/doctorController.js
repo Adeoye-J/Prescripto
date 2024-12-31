@@ -68,4 +68,17 @@ const doctorAppointments = async (req, res) => {
     }
 }
 
+// API to mark appointment completed
+const appointmentCompleted = async (req, res) => {
+    try {
+        const {docId, appointment } = req.body
+        const appointmentData = await appointmentModel.find({docId})
+        if (appointmentData) {
+
+        }
+    } catch (error) {
+        
+    }
+}
+
 export {changeAvailability, doctorList, doctorLogin, doctorAppointments}
