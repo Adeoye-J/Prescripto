@@ -137,4 +137,8 @@ const doctorDashboard = async (req,res) => {
     }
 }
 
+// API to get doctor profile for Doctor Panel
+const doctorProfile = async
+
+
 export {changeAvailability, doctorList, doctorLogin, doctorAppointments, appointmentCancelled, appointmentCompleted, doctorDashboard}

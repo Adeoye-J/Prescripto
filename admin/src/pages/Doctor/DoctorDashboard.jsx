@@ -5,8 +5,8 @@ import { AppContext } from '../../context/AppContext'
 
 const DoctorDashboard = () => {
 
-    const {dToken, dashData, setDashData, getDashboardData} = useContext(DoctorContext)
-    const {currency} = useContext(AppContext)
+    const {dToken, dashData, setDashData, getDashboardData, appointmentCancelled, appointmentCompleted} = useContext(DoctorContext)
+    const {currency, slotDateFormat} = useContext(AppContext)
 
     useEffect(() => {
         if (dToken) {
@@ -20,7 +20,7 @@ const DoctorDashboard = () => {
                 <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer hover:scale-105 transition-all">
                     <img className='w-14' src={assets.earning_icon} alt="Earning Icon" />
                     <div className="">
-                        <p className='text-xl font-semibold text-gray-600'>{dashData.earnings}</p>
+                        <p className='text-xl font-semibold text-gray-600'>{currency}{dashData.earnings}</p>
                         <p className='text-gray-400'>Earnings</p>
                     </div>
                 </div>
@@ -47,17 +47,22 @@ const DoctorDashboard = () => {
                 </div>
                 <div className="pt-4 border border-t-0">
                     {
-                        dashboardData.latestAppointments.map((item, index) => (
+                        dashData.latestAppointments.map((item, index) => (
                             <div key={index} className="flex items-center px-6 py-3 gap-3 hover:bg-gray-100">
-                                <img className='w-10 rounded-full' src={item.docData.image} alt="Doctor's Image" />
+                                <img className='w-10 rounded-full' src={item.userData.image} alt="Doctor's Image" />
                                 <div className="flex-1 text-sm">
-                                    <p className='text-gray-800 font-medium'>{item.docData.name}</p>
+                                    <p className='text-gray-800 font-medium'>{item.userData.name}</p>
                                     <p className='text-gray-600'>{slotDateFormat(item.slotDate)}</p>
                                 </div>
                                 {
-                                    item.cancelled
+                                    item.cancelled 
                                     ? <p className='text-red-400 text-xs font-medium'>Cancelled</p>
-                                    : <img onClick={() => cancelAppointment(item._id)} className='w-10 cursor-pointer' src={assets.cancel_icon} alt="cancel icon" />
+                                    : item.isCompleted
+                                        ? <p className='text-green-500 text-xs font-medium'>Completed</p>
+                                        : <div className='flex'>
+                                            <img onClick={() => appointmentCancelled(item._id)} className='w-10 cursor-pointer' src={assets.cancel_icon} alt="cancel icon" />
+                                            <img onClick={() => appointmentCompleted(item._id)} className='w-10 cursor-pointer' src={assets.tick_icon} alt="Tick Icon" />
+                                        </div>
                                 }
                             </div>
                         ))
