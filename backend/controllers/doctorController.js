@@ -178,7 +178,7 @@ const updateDoctorProfile = async (req, res) => {
             docId,
             { fees, address, available },
             // { new: true, runValidators: true } // Return the updated document and run validators
-        ).select("-password");
+        )
 
         if (!updatedDoc) {
             return res.status(404).json({
@@ -191,7 +191,7 @@ const updateDoctorProfile = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Profile successfully updated",
-            data: updatedDoc, // Optionally include updated data
+            // data: updatedDoc, // Optionally include updated data
         });
     } catch (error) {
         console.log(error)
