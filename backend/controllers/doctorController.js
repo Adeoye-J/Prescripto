@@ -102,4 +102,21 @@ const appointmentCancelled = async (req, res) => {
     }
 }
 
+// API to get dasboardData for doctor's panel
+const doctorDashboard = async (req,res) => {
+    try {
+        const {docId} = req.body
+        const appointments =await appointmentModel.find({docId})
+        let earnings = 0
+        appointments.map((item) => {
+            if (item.isCompleted || item.payment) {
+                earnings += item.amount
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
+
 export {changeAvailability, doctorList, doctorLogin, doctorAppointments, appointmentCancelled, appointmentCompleted}
