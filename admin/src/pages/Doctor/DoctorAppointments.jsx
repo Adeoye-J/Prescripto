@@ -37,7 +37,7 @@ const DoctorAppointments = () => {
                                 <img className='w-8 rounded-full' src={item.userData.image} alt="User Image" />
                                 <p>{item.userData.name}</p>
                             </div>
-                            <div className="text-xs inline border border-primary px-2 rounded-full">
+                            <div className="text-xs border border-primary px-2 rounded-full">
                                 <p>{item.payment ? "Online" : "Cash"}</p>
                             </div>
                             <p className='max-sm:hidden'>{calculateAge(item.userData.dob)}</p>
