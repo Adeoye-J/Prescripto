@@ -71,14 +71,35 @@ const doctorAppointments = async (req, res) => {
 // API to mark appointment completed
 const appointmentCompleted = async (req, res) => {
     try {
-        const {docId, appointment } = req.body
-        const appointmentData = await appointmentModel.find({docId})
-        if (appointmentData) {
-
+        const {docId, appointmentId} = req.body
+        const appointmentData = await appointmentModel.findById(appointmentId)
+        if (appointmentData && appointmentData.docId === docId) {
+            await appointmentModel.findByIdAndUpdate(appointmentId, {isCompleted: true})
+            return res.json({success: true, message: "Appointment Completed"})
+        } else {
+            return res.json({success: false, message: "Unauthorized Action or Appointment Does not exist"})
         }
     } catch (error) {
-        
+        console.log(error)
+        res.json({success: false, message: error.message})
     }
 }
 
-export {changeAvailability, doctorList, doctorLogin, doctorAppointments}
+// API to mark appointment cancelled
+const appointmentCancelled = async (req, res) => {
+    try {
+        const {docId, appointmentId} = req.body
+        const appointmentData = await appointmentModel.findById(appointmentId)
+        if (appointmentData && appointmentData.docId === docId) {
+            await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled: true})
+            return res.json({success: true, message: "Appointment Cancelled"})
+        } else {
+            return res.json({success: false, message: "Cancellation Failed"})
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
+
+export {changeAvailability, doctorList, doctorLogin, doctorAppointments, appointmentCancelled, appointmentCompleted}

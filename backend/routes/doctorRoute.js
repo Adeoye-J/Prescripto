@@ -9,5 +9,7 @@ doctorRouter.get("/list", doctorList)
 doctorRouter.post("/login", doctorLogin)
 
 doctorRouter.get("/appointments", authDoctor,doctorAppointments)
+doctorRouter.get("/appointment-completed", authDoctor,doctorAppointments)
+doctorRouter.get("/appointment=cancelled", authDoctor,doctorAppointments)
 
 export default doctorRouter
