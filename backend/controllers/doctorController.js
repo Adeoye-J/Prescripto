@@ -158,34 +158,33 @@ const updateDoctorProfile = async (req, res) => {
     try {
         const {docId, fees, address, available} = req.body
         
-        await doctorModel.findByIdAndUpdate(docId, {fees, address, available})
-        const profileData = await doctorModel.findById(docId).select("-password")
+        // Validate request body
+        if (!docId || fees === undefined || !address || available === undefined) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields (docId, fees, address, available) are required.",
+            });
+        }
 
-        console.log(profileData)
+        // Update doctor profile
+        const updatedDoc = await doctorModel.findByIdAndUpdate(
+            docId,
+            { fees, address, available },
+            // { new: true, runValidators: true } // Return the updated document and run validators
+        )
 
+        if (!updatedDoc) {
+            return res.status(404).json({
+                success: false,
+                message: "Doctor not found.",
+            });
+        }
+
+        
         res.json({success: true, message: "Profile Successfully Updated"})
 
-        // Validate request body
-    //     if (!docId || fees === undefined || !address || available === undefined) {
-    //         return res.status(400).json({
-    //             success: false,
-    //             message: "All fields (docId, fees, address, available) are required.",
-    //         });
-    //     }
 
-    //     // Update doctor profile
-    //     const updatedDoc = await doctorModel.findByIdAndUpdate(
-    //         docId,
-    //         { fees, address, available },
-    //         // { new: true, runValidators: true } // Return the updated document and run validators
-    //     )
 
-    //     if (!updatedDoc) {
-    //         return res.status(404).json({
-    //             success: false,
-    //             message: "Doctor not found.",
-    //         });
-    //     }
 
     //     // Success response
     //     res.status(200).json({
@@ -193,10 +192,10 @@ const updateDoctorProfile = async (req, res) => {
     //         message: "Profile successfully updated",
     //         // data: updatedDoc, // Optionally include updated data
     //     });
-    // } catch (error) {
-    //     console.log(error)
-    //     res.json({success: false, message: error.message})
-    // }
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
 }
 
 
