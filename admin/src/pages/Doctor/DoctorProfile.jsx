@@ -14,10 +14,10 @@ const DoctorProfile = () => {
     }, [dToken])
 
     return profileData && (
-        <div>
-            <div className="">
+        <div className=''>
+            <div className="flex flex-col gap-4 m-5">
                 <div className="">
-                    <img src={profileData.image} alt="Doctor's Image" />
+                    <img className='bg-primary transo' src={profileData.image} alt="Doctor's Image" />
                 </div>
 
                 <div className="">
@@ -30,8 +30,23 @@ const DoctorProfile = () => {
                     </div>
 
                     <div className="">
-                        <p></p>
+                        <p>About:</p>
+                        <p>{profileData.about}</p>
                     </div>
+
+                    <p>Appointment fee: <span>{currency} {profileData.fees}</span></p>
+
+                    <div className="">
+                        <p>Address:</p>
+                        <p>{profileData.address.line1} <br /> {profileData.address.line2}</p>
+                    </div>
+
+                    <div className="">
+                        <input type="checkbox" />
+                        <label htmlFor="">Available</label>
+                    </div>
+
+                    <button>Edit</button>
 
                 </div>
             </div>
