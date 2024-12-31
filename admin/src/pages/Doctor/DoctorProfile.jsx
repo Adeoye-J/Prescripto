@@ -17,14 +17,14 @@ const DoctorProfile = () => {
         <div className=''>
             <div className="flex flex-col gap-4 m-5">
                 <div className="">
-                    <img className='bg-primary transo' src={profileData.image} alt="Doctor's Image" />
+                    <img className='bg-primary/80 w-full sm:max-w-64 rounded-lg' src={profileData.image} alt="Doctor's Image" />
                 </div>
 
-                <div className="">
+                <div className="flex-1 border border-stone-100 rounded-lg p-8 py-7 bg-white">
 
-                    <p>{profileData.name}</p>
+                    <p className='text-3xl font-medium text-gray-700'>{profileData.name}</p>
 
-                    <div className="">
+                    <div className="flex items-center gap-2 ">
                         <p>{profileData.degree} - {profileData.speciality}</p>
                         <button>{profileData.experience}</button>
                     </div>
