@@ -6,7 +6,7 @@ const Footer = () => {
         <div className='md:mx-10'>
             <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
                 <div className="">
-                    <img className='mb-5 w-24' src={assets.logo} alt="Logo" />
+                    <img className='mb-5 w-24' src={assets.logo_patient} alt="Logo" />
                     <p className='w-full md:w-2/3 text-gray-500 leading-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque obcaecati ab autem in sint mollitia quae commodi aut explicabo dolor minima repudiandae molestias, alias facilis aspernatur molestiae. Fugiat, omnis doloribus.</p>
                 </div>
 
