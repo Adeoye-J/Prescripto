@@ -5,6 +5,7 @@ import profile_pic from './profile_pic.png'
 import contact_image from './contact_image.png'
 import about_image from './about_image.png'
 import logo from './logo.svg'
+import logo_patient from "./logo_patient.png"
 import logo_updated from "./logo_updated.svg"
 import logo_updated_1 from "./logo_updated_1.svg"
 import dropdown_icon from './dropdown_icon.svg'
@@ -47,6 +48,7 @@ export const assets = {
     logo,
     logo_updated,
     logo_updated_1,
+    logo_patient,
     chats_icon,
     verified_icon,
     info_icon,
