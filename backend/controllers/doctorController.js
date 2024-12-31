@@ -54,4 +54,9 @@ const doctorLogin = async (req, res) => {
     }
 }
 
+// API to view doctors appointment
+const doctorAppointments = async (req, res) => {
+    
+}
+
 export {changeAvailability, doctorList, doctorLogin}
