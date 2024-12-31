@@ -115,6 +115,17 @@ const doctorDashboard = async (req,res) => {
         })
 
         let patients = []
+
+        appointments.map((item) => {
+            if (!patients.includes(item.userId)) {
+                patients.push(item.userId)
+            }
+        })
+
+        const dashData = {
+            earnings
+        }
+
     } catch (error) {
         console.log(error)
         res.json({success: false, message: error.message})
