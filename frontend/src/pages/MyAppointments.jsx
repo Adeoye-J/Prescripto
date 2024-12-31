@@ -188,7 +188,8 @@ const MyAppointments = () => {
                                 }
 
                                 {
-                                    item
+                                    item.isCompleted && 
+                                    <button className='sm:min-w-48 py-2 border border-primary rounded text-primary'>Completed</button>
                                 }
                                 {/* {showSuccess && (
                                     <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 flex items-center justify-center">
