@@ -16,6 +16,7 @@ const DoctorContextProvider = (props) => {
             const {data} = await axios.get(backendUrl + "/api/doctor/appointments", {headers: {dToken}})
             if (data.success) {
                 setDocAppointments(data.appointments.reverse())
+                console.log(data.appointments.reverse());
             } else {
                 toast.error(data.message)
             }
@@ -28,7 +29,10 @@ const DoctorContextProvider = (props) => {
     const value = {
         dToken,
         setDToken,
-        backendUrl
+        backendUrl,
+        docAppointments,
+        setDocAppointments,
+        getDocAppointments
     }
 
     return (
