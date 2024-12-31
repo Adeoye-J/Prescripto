@@ -24,7 +24,7 @@ const DoctorProfile = () => {
 
                     <p className='text-3xl font-medium text-gray-700'>{profileData.name}</p>
 
-                    <div className="flex items-center gap-2 ">
+                    <div className="flex items-center gap-2 mt-1 tex">
                         <p>{profileData.degree} - {profileData.speciality}</p>
                         <button>{profileData.experience}</button>
                     </div>
