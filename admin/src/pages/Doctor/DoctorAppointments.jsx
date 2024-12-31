@@ -43,8 +43,16 @@ const DoctorAppointments = () => {
                             <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
                             <p>{currency}{item.amount}</p>
                             <div className="">
-                                <img onClick={() => appointmentCancelled(item._id)} className='w-10 cursor-pointer' src={assets.cancel_icon} alt="cancel icon" />
-                                <img onClick={() => appointmentCompleted(item._id)} className='w-10 cursor-pointer' src={assets.tick_icon} alt="Tick Icon" />
+                                {
+                                    item.cancelled 
+                                    ? <p className='text-red-400 text-xs font-medium'>Cancelled</p>
+                                    : item.isCompleted
+                                        ? <p>Completed</p>
+                                        : <div className='flex'>
+                                            <img onClick={() => appointmentCancelled(item._id)} className='w-10 cursor-pointer' src={assets.cancel_icon} alt="cancel icon" />
+                                            <img onClick={() => appointmentCompleted(item._id)} className='w-10 cursor-pointer' src={assets.tick_icon} alt="Tick Icon" />
+                                        </div>
+                                }
                             </div>
                         </div>
                     ))
