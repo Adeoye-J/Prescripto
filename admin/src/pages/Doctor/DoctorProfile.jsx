@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { DoctorContext } from '../../context/DoctorContext'
 import { AppContext } from '../../context/AppContext'
 
@@ -6,6 +6,8 @@ const DoctorProfile = () => {
 
     const {dToken, profileData, setProfileData, getProfileData} = useContext(DoctorContext)
     const {currency, backendUrl} = useContext(AppContext)
+
+    const [isEdit, setIsEdit] = useState(false)
 
     useEffect(() => {
         if (dToken) {
@@ -41,12 +43,12 @@ const DoctorProfile = () => {
                         <p className='text-sm'>{profileData.address.line1} <br /> {profileData.address.line2}</p>
                     </div>
 
-                    <div className="fle">
-                        <input type="checkbox" />
+                    <div className="flex gap-1 pt-2">
+                        <input checked={profileData.available} type="checkbox" />
                         <label htmlFor="">Available</label>
                     </div>
 
-                    <button>Edit</button>
+                    <button onClick={() => setIsEdit(true)} className='px-4 py-1 border border-primary text-sm rounded-full mt-5 hover:bg-primary hover:text-white transition-all'>Edit</button>
 
                 </div>
             </div>
