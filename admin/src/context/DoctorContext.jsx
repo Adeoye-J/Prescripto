@@ -10,6 +10,7 @@ const DoctorContextProvider = (props) => {
 
     const [dToken, setDToken] = useState(localStorage.getItem("dToken") || "")
     const [docAppointments, setDocAppointments] = useState([])
+    const [dashData, setDashData] = useState()
 
     const getDocAppointments = async () => {
         try {
@@ -53,6 +54,10 @@ const DoctorContextProvider = (props) => {
             console.log(error)
             toast.error(error.message)
         }
+    }
+
+    const dashboardData = async (appointmentId) => {
+
     }
 
     const value = {

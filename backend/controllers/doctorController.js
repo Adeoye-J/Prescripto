@@ -123,8 +123,13 @@ const doctorDashboard = async (req,res) => {
         })
 
         const dashData = {
-            earnings
+            earnings,
+            appointments: appointments.length,
+            patients: patients.length,
+            latestAppointments: appointments.reverese().slice(0, 5)
         }
+
+        res.json({success: true, dashData})
 
     } catch (error) {
         console.log(error)
@@ -132,4 +137,4 @@ const doctorDashboard = async (req,res) => {
     }
 }
 
-export {changeAvailability, doctorList, doctorLogin, doctorAppointments, appointmentCancelled, appointmentCompleted}
+export {changeAvailability, doctorList, doctorLogin, doctorAppointments, appointmentCancelled, appointmentCompleted, doctorDashboard}
