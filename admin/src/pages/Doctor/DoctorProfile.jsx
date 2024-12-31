@@ -41,16 +41,21 @@ const DoctorProfile = () => {
                     <div className="flex gap-2 py-2">
                         <p>Address:</p>
                         <p className='text-sm'>
-                            {isEdit ? <input type="text" onChange={() => setProfileData((prev) => ({...prev, address: {...}}))} /> : profileData.address.line1} 
+                            {isEdit ? <input type="text" onChange={() => setProfileData((prev) => ({...prev, address: {...prev.address, line1: e.target.value}}))} value={profileData.address.line1}/> : profileData.address.line1} 
                             <br /> 
-                            {profileData.address.line2}</p>
+                            {isEdit ? <input type="text" onChange={() => setProfileData((prev) => ({...prev, address: {...prev.address, line2: e.target.value}}))} value={profileData.address.line2}/> : profileData.address.line2}                     
+                        </p>
                     </div>
 
                     <div className="flex gap-1 pt-2">
-                        <input checked={profileData.available} type="checkbox" />
+                        <input onChange={() => isEdit && setProfileData((prev) => ({...prev, available: !prev.available}))} checked={profileData.available} type="checkbox" />
                         <label htmlFor="">Available</label>
                     </div>
 
+                    {
+                        isEdit 
+                    }
+                    <button onClick={() => setIsEdit(true)} className='px-4 py-1 border border-primary text-sm rounded-full mt-5 hover:bg-primary hover:text-white transition-all'>Edit</button>
                     <button onClick={() => setIsEdit(true)} className='px-4 py-1 border border-primary text-sm rounded-full mt-5 hover:bg-primary hover:text-white transition-all'>Edit</button>
 
                 </div>
