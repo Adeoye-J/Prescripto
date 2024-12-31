@@ -180,18 +180,14 @@ const updateDoctorProfile = async (req, res) => {
             });
         }
 
-        
-        res.json({success: true, message: "Profile Successfully Updated"})
 
+        // Success response
+        res.status(200).json({
+            success: true,
+            message: "Profile successfully updated",
+            // data: updatedDoc, // Optionally include updated data
+        });
 
-
-
-    //     // Success response
-    //     res.status(200).json({
-    //         success: true,
-    //         message: "Profile successfully updated",
-    //         // data: updatedDoc, // Optionally include updated data
-    //     });
     } catch (error) {
         console.log(error)
         res.json({success: false, message: error.message})
