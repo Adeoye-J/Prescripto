@@ -11,6 +11,6 @@ doctorRouter.post("/login", doctorLogin)
 doctorRouter.get("/appointments", authDoctor,doctorAppointments)
 doctorRouter.post("/appointment-completed", authDoctor, appointmentCompleted)
 doctorRouter.post("/appointment-cancelled", authDoctor, appointmentCancelled)
-doctorRouter.post("/dashboard", authDoctor, doctorDashboard)
+doctorRouter.get("/dashboard", authDoctor, doctorDashboard)
 
 export default doctorRouter
