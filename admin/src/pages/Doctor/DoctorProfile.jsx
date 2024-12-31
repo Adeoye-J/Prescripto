@@ -17,6 +17,7 @@ const DoctorProfile = () => {
                 fees: profileData.fees,
                 available: profileData.available
             }
+            const {data} = await axios.post(backendUrl + "/api/doctor/appointment-cancelled", {appointmentId}, {headers: {dToken}})
 
             const {data} = await axios.post(backendUrl + "/api/doctor/update-profile", {updateData}, {headers: {dToken}})
             if (data.success) {
