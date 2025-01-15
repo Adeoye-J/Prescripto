@@ -4,6 +4,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { loadStripe } from '@stripe/stripe-js';
 import { useNavigate } from 'react-router-dom';
+import PayButton from '../components/PayButton';
 
 const MyAppointments = () => {
 
@@ -52,25 +53,8 @@ const MyAppointments = () => {
         }
     }
 
-    const stripePromise = loadStripe('pk_test_51QaLFBAHbRfNobUMeYPuFzmVmFqafGotHCACW3qPw5F89jvpxMZzEvR1OHFdH7zXrPNByoRWJVtxskGEd4em2Z0Z00llhVkXru');
 
-    const handlePayment = async (appointmentId) => {
-        const stripe = await stripePromise; // Ensure Stripe.js is loaded
-        try {
-            const { data } = await axios.post(backendUrl + "/api/user/make-payment", { appointmentId }, { headers: { token } } );
-            if (data.success) {
-                console.log(data.session)
-                // window.location.href = data.session.url;
-                setSessionId(data.session.id)
-                await stripe.redirectToCheckout({ sessionId: data.session.id });
-            } else {
-                toast.error(data.message || "Unable to initiate payment.");
-            }
-        } catch (error) {
-            console.error(error);
-            toast.error(error.message);
-        }
-    };
+    
 
     const verifyPayment = async () => {
         try {
@@ -174,7 +158,7 @@ const MyAppointments = () => {
                                 {
                                     (!item.cancelled && !item.paid &!item.isCompleted) && 
                                     <>
-                                        <button onClick={() => handlePayment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
+                                        <PayButton id={item._id} />
                                         <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
                                     </>
                                 }

@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken"
 import {v2 as cloudinary} from "cloudinary"
 import doctorModel from "../models/doctorModel.js"
 import appointmentModel from "../models/appointmentModel.js"
-// import razorpay from "razorpay"
 import Stripe from "stripe"
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -261,7 +260,8 @@ const makePayment = async (req, res) => {
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: 'Doctor Appointment Payment',
+                            name: 'Payment for Appointment with ' + appointmentData.docData.name,
+                            description: 'Appointment on ' + appointmentData.slotDate + ' at ' + appointmentData.slotTime,
                         },
                         unit_amount: appointmentData.amount * 100, // Amount in cents
                     },
@@ -272,12 +272,8 @@ const makePayment = async (req, res) => {
             metadata: {
                 appointment_id: appointmentId, // Include appointment ID as metadata
             },
-            success_url: `${process.env.BACKEND_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.BACKEND_URL}/payment/cancelled?session_id={CHECKOUT_SESSION_ID}`,
-            // success_url: `http://localhost:5173/my-appointments/success?session_id={CHECKOUT_SESSION_ID}`,
-            // cancel_url: `http://localhost:5173/my-appointments/cancelled?session_id={CHECKOUT_SESSION_ID}`,
-            // success_url: `http://localhost:4000/checkout?success=true`,
-            // cancel_url: `http://localhost:4000/checkout?canceled=true`,
+            success_url: `${process.env.FRONTEND_URL}/payment-success`,
+            cancel_url: `${process.env.FRONTEND_URL}/payment-cancelled`,
         })
 
         console.log("Got here 1")
@@ -290,22 +286,23 @@ const makePayment = async (req, res) => {
     }
 }
 
-const verifyPayment = async (req, res) => {
-    try {
-        const { sessionId } = req.body;
-        const session = await stripe.checkout.sessions.retrieve(sessionId);
+// const verifyPayment = async (req, res) => {
+//     try {
+//         const { sessionId } = req.body;
+//         const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-        if (session.payment_status === 'paid') {
-            const appointmentId = session.metadata.appointment_id;
-            await appointmentModel.findByIdAndUpdate(appointmentId, { paid: true });
-            res.json({ success: true, message: 'Payment successful, verified and updated.' });
-        } else {
-            res.json({ success: false, message: 'Payment not completed.' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.json({ success: false, message: error.message });
-    }
-};
+//         if (session.payment_status === 'paid') {
+//             const appointmentId = session.metadata.appointment_id;
+//             await appointmentModel.findByIdAndUpdate(appointmentId, { paid: true });
+//             res.json({ success: true, message: 'Payment successful, verified and updated.' });
+//         } else {
+//             res.json({ success: false, message: 'Payment not completed.' });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         res.json({ success: false, message: error.message });
+//     }
+// };
+
 
 export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppointments, cancelAppointment, makePayment, verifyPayment}
