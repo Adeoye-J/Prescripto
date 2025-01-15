@@ -302,7 +302,7 @@ const makePayment = async (req, res) => {
 //         console.error(error);
 //         res.json({ success: false, message: error.message });
 //     }
-// };
+// }; 
 
 
 export {registerUser, userLogin, getProfile, updateProfile, bookAppointment, userAppointments, cancelAppointment, makePayment, verifyPayment}
