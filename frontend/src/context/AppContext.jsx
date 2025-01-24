@@ -14,6 +14,8 @@ const AppContextProvider = (props) => {
 
     const [userData, setUserData] = useState(false)
 
+    const [sessionId, setSessionId] = useState(null);
+
     const getDoctorsData = async () => {
         try {
             const {data} = await axios.get(backendUrl + "/api/doctor/list")
@@ -56,9 +58,28 @@ const AppContextProvider = (props) => {
         }
     }, [token])
 
+    useEffect(() => {
+        if (!sessionId) return;
+        const fetchPaymentStatus = async () => {
+            try {
+                const { data } = await axios.get(`${backendUrl}/api/user/confirm-payment?sessionId=${sessionId}`, {headers: {token}});
+                if (data.success) {
+                    alert("Payment confirmed!");
+                } else {
+                    alert("Payment not yet confirmed. Please try again later.");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Failed to fetch payment status.");
+            }
+        };
+
+        fetchPaymentStatus();
+    }, []);
+
     const currencySymbol = "$"
 
-    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, setUserData, getDoctorsData}
+    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, setUserData, getDoctorsData, sessionId, setSessionId}
 
     return (
         <AppContext.Provider value={value}>

@@ -9,12 +9,10 @@ import PayButton from '../components/PayButton';
 const MyAppointments = () => {
 
     const {doctors, backendUrl, token, getDoctorsData} = useContext(AppContext)
-    const navigate = useNavigate()
-    // const [sessionId, setSessionId] = useState()
+    // const navigate = useNavigate()
     const [appointments, setAppointments] = useState([])
-    const [showSuccess, setShowSuccess] = useState(false); // State to manage success popup visibility
-    const [showCancelled, setShowCancelled] = useState(false); // State to manage success popup visibility
-    const [sessionId, setSessionId] = useState(null); // Store session ID after success
+    // const [showSuccess, setShowSuccess] = useState(false); // State to manage success popup visibility
+    // const [showCancelled, setShowCancelled] = useState(false); // State to manage success popup visibility
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     const slotDateFormat = (slotDate) => {
@@ -38,7 +36,6 @@ const MyAppointments = () => {
 
     const cancelAppointment = async (appointmentId) => {
         try {
-            // console.log(appointmentId);
             const {data} = await axios.post(backendUrl +  "/api/user/cancel-appointment", {appointmentId}, {headers: {token}})
             if (data.success) {
                 toast.success(data.message)
@@ -56,31 +53,31 @@ const MyAppointments = () => {
 
     
 
-    const verifyPayment = async () => {
-        try {
-            const {data} = await axios.post(backendUrl + "/api/user/verify-payment", {sessionId}, {headers: {token}})
-            if (data.success) {
-                toast.success(data.message)
-                getUserAppointments();
-            } else {
-                toast.error(data.message)
-            }
-        } catch (error) {
-            console.error(error);
-            toast.error(error.message);
-        }
-    }
+    // const verifyPayment = async () => {
+    //     try {
+    //         const {data} = await axios.post(backendUrl + "/api/user/verify-payment", {sessionId}, {headers: {token}})
+    //         if (data.success) {
+    //             toast.success(data.message)
+    //             getUserAppointments();
+    //         } else {
+    //             toast.error(data.message)
+    //         }
+    //     } catch (error) {
+    //         console.error(error);
+    //         toast.error(error.message);
+    //     }
+    // }
 
-    const handleSuccessPage = () => {
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const sessionId = urlParams.get('session_id');
+    // const handleSuccessPage = () => {
+    //     // const urlParams = new URLSearchParams(window.location.search);
+    //     // const sessionId = urlParams.get('session_id');
     
-        if (sessionId) {
-          console.log('Session ID from success URL:', sessionId);
-          // Optionally verify payment with the backend
-          verifyPayment();
-        }
-    };
+    //     if (sessionId) {
+    //       console.log('Session ID from success URL:', sessionId);
+    //       // Optionally verify payment with the backend
+    //       verifyPayment();
+    //     }
+    // };
 
     // const handleSuccessPage = () => {
     //     const urlParams = new URLSearchParams(window.location.search);
@@ -115,9 +112,10 @@ const MyAppointments = () => {
 
       // Run this on the success page to extract session_id from the URL
     useEffect(() => {
-        if (window.location.pathname === '/success') {
-            handleSuccessPage();
-        }
+        // if (window.location.pathname === '/success') {
+        //     handleSuccessPage();
+        // }
+        getUserAppointments()
     }, []);
 
     // useEffect(() => {

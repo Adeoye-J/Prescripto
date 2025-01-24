@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import axios from "axios"
 import { AppContext } from '../context/AppContext';
+import { toast } from 'react-toastify';
 // const stripePromise = loadStripe('pk_test_51QaLFBAHbRfNobUMeYPuFzmVmFqafGotHCACW3qPw5F89jvpxMZzEvR1OHFdH7zXrPNByoRWJVtxskGEd4em2Z0Z00llhVkXru');
 
 const PayButton = ({id}) => {
-    const {backendUrl, token} = useContext(AppContext)
+    const {backendUrl, token, setSessionId} = useContext(AppContext)
 
     const handlePayment = async (appointmentId) => {
         // const stripe = await stripePromise; // Ensure Stripe.js is loaded
