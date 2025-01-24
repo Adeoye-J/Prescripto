@@ -34,7 +34,6 @@ const AppContextProvider = (props) => {
         try {
             const {data} = await axios.get(backendUrl + "/api/user/get-profile", {headers: {token}})
             if (data.success) {
-                // console.log(data.userData)
                 setUserData(data.userData)
             } else {
                 toast.error(data.message)
@@ -58,24 +57,24 @@ const AppContextProvider = (props) => {
         }
     }, [token])
 
-    useEffect(() => {
-        if (!sessionId) return;
-        const fetchPaymentStatus = async () => {
-            try {
-                const { data } = await axios.get(`${backendUrl}/api/user/confirm-payment?sessionId=${sessionId}`, {headers: {token}});
-                if (data.success) {
-                    alert("Payment confirmed!");
-                } else {
-                    alert("Payment not yet confirmed. Please try again later.");
-                }
-            } catch (error) {
-                console.error(error);
-                alert("Failed to fetch payment status.");
-            }
-        };
+    // useEffect(() => {
+    //     if (!sessionId) return;
+    //     const fetchPaymentStatus = async () => {
+    //         try {
+    //             const { data } = await axios.get(`${backendUrl}/api/user/confirm-payment?sessionId=${sessionId}`, {headers: {token}});
+    //             if (data.success) {
+    //                 alert("Payment confirmed!");
+    //             } else {
+    //                 alert("Payment not yet confirmed. Please try again later.");
+    //             }
+    //         } catch (error) {
+    //             console.error(error);
+    //             alert("Failed to fetch payment status.");
+    //         }
+    //     };
 
-        fetchPaymentStatus();
-    }, []);
+    //     fetchPaymentStatus();
+    // }, []);
 
     const currencySymbol = "$"
 

@@ -3,16 +3,13 @@ import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { loadStripe } from '@stripe/stripe-js';
-import { useNavigate } from 'react-router-dom';
 import PayButton from '../components/PayButton';
 
 const MyAppointments = () => {
 
-    const {doctors, backendUrl, token, getDoctorsData} = useContext(AppContext)
-    // const navigate = useNavigate()
+    const {backendUrl, token, getDoctorsData} = useContext(AppContext)
     const [appointments, setAppointments] = useState([])
-    // const [showSuccess, setShowSuccess] = useState(false); // State to manage success popup visibility
-    // const [showCancelled, setShowCancelled] = useState(false); // State to manage success popup visibility
+
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     const slotDateFormat = (slotDate) => {
@@ -24,7 +21,6 @@ const MyAppointments = () => {
         try {
             const {data} = await axios.get(backendUrl + "/api/user/user-appointments", {headers: {token}})
             if (data.success){
-                console.log(data.appointments);
                 setAppointments(data.appointments.reverse())
             }
         } catch (error) {
@@ -50,81 +46,9 @@ const MyAppointments = () => {
         }
     }
 
-
-    
-
-    // const verifyPayment = async () => {
-    //     try {
-    //         const {data} = await axios.post(backendUrl + "/api/user/verify-payment", {sessionId}, {headers: {token}})
-    //         if (data.success) {
-    //             toast.success(data.message)
-    //             getUserAppointments();
-    //         } else {
-    //             toast.error(data.message)
-    //         }
-    //     } catch (error) {
-    //         console.error(error);
-    //         toast.error(error.message);
-    //     }
-    // }
-
-    // const handleSuccessPage = () => {
-    //     // const urlParams = new URLSearchParams(window.location.search);
-    //     // const sessionId = urlParams.get('session_id');
-    
-    //     if (sessionId) {
-    //       console.log('Session ID from success URL:', sessionId);
-    //       // Optionally verify payment with the backend
-    //       verifyPayment();
-    //     }
-    // };
-
-    // const handleSuccessPage = () => {
-    //     const urlParams = new URLSearchParams(window.location.search);
-    //     const sessionId = urlParams.get('session_id');
-    
-    //     if (sessionId) {
-    //         setSessionId(sessionId); // Set the session ID
-    //         setShowSuccess(true); // Show the success popup
-    //     }
-    // };
-
-    // const handleCancelledPage = () => {
-    //     const urlParams = new URLSearchParams(window.location.search);
-    //     const sessionId = urlParams.get('session_id');
-    
-    //     if (sessionId) {
-    //       setSessionId(sessionId); // Set the session ID
-    //       setShowCancelled(true); // Show the success popup
-    //     }
-    // };
-
-
-    // useEffect(() => {
-    //     if (window.location.pathname === '/my-appointments/success') {
-    //       handleSuccessPage();
-    //     } else if (window.location.pathname === '/my-appointments/cancelled') {
-    //         handleCancelledPage();
-    //     }
-
-    //     getUserAppointments();
-    // }, []);
-
-      // Run this on the success page to extract session_id from the URL
     useEffect(() => {
-        // if (window.location.pathname === '/success') {
-        //     handleSuccessPage();
-        // }
         getUserAppointments()
     }, []);
-
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         navigate('/my-appointments'); // Redirect to the appointments page after 3 seconds
-    //     }, 3000);
-    
-    //     return () => clearTimeout(timeout);
-    // }, [showSuccess, showCancelled]);
 
     useEffect(() => {
         if (token) {

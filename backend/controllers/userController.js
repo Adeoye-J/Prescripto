@@ -282,49 +282,16 @@ const makePayment = async (req, res) => {
         res.json({ success: false, message: "Failed to initiate payment. Try Again Later." });
     }
 }
-
-// const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET; // Set up your webhook secret in Stripe Dashboard
-
-// const verifyPayment = async (req, res) => {
-//     const sig = req.headers['stripe-signature'];
-
-//     let event;
-//     try {
-//         // Verify the event with the signature
-//         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-//     } catch (err) {
-//         console.error(`Webhook signature verification failed: ${err.message}`);
-//         return res.status(400).send(`Webhook Error: ${err.message}`);
-//     }
-
-//     // Handle the event type
-//     switch (event.type) {
-//         case 'checkout.session.completed':
-//             const session = event.data.object;
-
-//             // Confirm payment in your database
-//             const appointmentId = session.metadata.appointment_id;
-//             await appointmentModel.findByIdAndUpdate(appointmentId, { paid: true });
-
-//             console.log(`Payment successful for appointment ${appointmentId}`);
-//             break;
-//         default:
-//             console.log(`Unhandled event type ${event.type}`);
-//     }
-
-//     // Return a 200 response to acknowledge receipt of the event
-//     res.status(200).send();
-// };
-
 const confirmPayment = async (req, res) => {
     const { sessionId } = req.query;
 
     try {
         const session = await stripe.checkout.sessions.retrieve(sessionId);
-
+        console.log(session);
         if (session.payment_status === 'paid') {
             // Update the database
             const appointmentId = session.metadata.appointment_id;
+            console.log(`appointmentId: ${appointmentId}`);
             await appointmentModel.findByIdAndUpdate(appointmentId, { paid: true });
 
             return res.json({ success: true, message: "Payment confirmed." });
@@ -336,9 +303,6 @@ const confirmPayment = async (req, res) => {
         return res.json({ success: false, message: "Failed to retrieve payment status." });
     }
 };
-
-
-
 
 // const verifyPayment = async (req, res) => {
 //     try {
