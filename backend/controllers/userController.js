@@ -262,19 +262,20 @@ const makePayment = async (req, res) => {
                             name: 'Payment for Appointment with ' + appointmentData.docData.name,
                             description: 'Appointment on ' + appointmentData.slotDate + ' at ' + appointmentData.slotTime,
                         },
-                        unit_amount: appointmentData.amount * 100, // Amount in cents
+                        unit_amount: appointmentData.amount * 100, // Stripe requires amount in cents
                     },
                     quantity: 1,
                 },
             ],
             mode: 'payment',
             metadata: {
-                appointment_id: appointmentId, // Include appointment ID as metadata
+                appointment_id: appointmentId,
             },
-            success_url: `${process.env.FRONTEND_URL}/payment-success`,
-            cancel_url: `${process.env.FRONTEND_URL}/payment-cancelled`,
+            success_url: `${process.env.FRONTEND_URL}/payment-success`, // Redirect to frontend after successful payment
+            cancel_url: `${process.env.FRONTEND_URL}/payment-cancelled`, // Redirect to frontend after cancelled payment
         })
 
+        console.log(`session: ${session.id}`);
         res.json({success: true, session})
 
     } catch (error) {
@@ -284,7 +285,7 @@ const makePayment = async (req, res) => {
 }
 const confirmPayment = async (req, res) => {
     const { sessionId } = req.query;
-
+    console.log(sessionId)
     try {
         const session = await stripe.checkout.sessions.retrieve(sessionId);
         console.log(session);
@@ -296,7 +297,7 @@ const confirmPayment = async (req, res) => {
 
             return res.json({ success: true, message: "Payment confirmed." });
         } else {
-            return res.json({ success: false, message: "Payment not yet confirmed." });
+            return res.json({ success: false, message: "Payment not yet confirmed. Please try again later." });
         }
     } catch (error) {
         console.error(error);

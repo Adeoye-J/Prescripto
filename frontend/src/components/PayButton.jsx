@@ -1,10 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from "axios"
 import { AppContext } from '../context/AppContext';
 import { toast } from 'react-toastify';
 
 const PayButton = ({id}) => {
-    const {backendUrl, token, sessionId, setSessionId} = useContext(AppContext)
+    const {backendUrl, token } = useContext(AppContext)
+
+    const [sessionId, setSessionId] = useState(null);
 
     const handlePayment = async (appointmentId) => {
         try {
@@ -12,8 +14,8 @@ const PayButton = ({id}) => {
             if (data.success) {
                 console.log(data)
                 console.log(data.session)
-                window.location.href = data.session.url;
                 setSessionId(data.session.id)
+                window.location.href = data.session.url;
             } else {
                 toast.error(data.message || "Unable to initiate payment.");
             }
@@ -27,13 +29,13 @@ const PayButton = ({id}) => {
         try {
             const { data } = await axios.get(`${backendUrl}/api/user/confirm-payment?sessionId=${sessionId}`, {headers: {token}});
             if (data.success) {
-                alert("Payment confirmed!");
+                alert(data.message);
             } else {
-                alert("Payment not yet confirmed. Please try again later.");
+                alert(data.message);
             }
         } catch (error) {
             console.error(error);
-            alert("Failed to fetch payment status.");
+            alert(error.message);
         }
     };
 

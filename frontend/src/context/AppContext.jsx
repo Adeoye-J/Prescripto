@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-// import { doctors } from "../assets/assets";
 import {toast} from "react-toastify"
 import axios from "axios"
 
@@ -8,13 +7,12 @@ export const AppContext = createContext()
 const AppContextProvider = (props) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
+    
     const [doctors, setDoctors] = useState([])
 
     const [token, setToken] = useState(localStorage.getItem("token") || "")
 
     const [userData, setUserData] = useState(false)
-
-    const [sessionId, setSessionId] = useState(null);
 
     const getDoctorsData = async () => {
         try {
@@ -57,35 +55,15 @@ const AppContextProvider = (props) => {
         }
     }, [token])
 
-    // useEffect(() => {
-    //     if (!sessionId) return;
-    //     const fetchPaymentStatus = async () => {
-    //         try {
-    //             const { data } = await axios.get(`${backendUrl}/api/user/confirm-payment?sessionId=${sessionId}`, {headers: {token}});
-    //             if (data.success) {
-    //                 alert("Payment confirmed!");
-    //             } else {
-    //                 alert("Payment not yet confirmed. Please try again later.");
-    //             }
-    //         } catch (error) {
-    //             console.error(error);
-    //             alert("Failed to fetch payment status.");
-    //         }
-    //     };
-
-    //     fetchPaymentStatus();
-    // }, []);
-
     const currencySymbol = "$"
 
-    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, setUserData, getDoctorsData, sessionId, setSessionId}
+    const value = {doctors, currencySymbol, token, setToken, backendUrl, getUserData, userData, setUserData, getDoctorsData}
 
     return (
         <AppContext.Provider value={value}>
             {props.children}
         </AppContext.Provider>
     )
-
 }
 
 export default AppContextProvider
